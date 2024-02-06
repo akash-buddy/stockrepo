@@ -68,7 +68,7 @@ sl=['Abbott India', 'ACC', 'Adani Energy Solut.', 'Adani Green Energy',
 
 
 #fetcing data from yfin
-start_tim = time.time()
+# start_tim = time.time()
 print("Expected time to download data ==> 1 Minute")
 di= pd.DataFrame()
 def get_stock_data(ticker, start_date, end_date):
@@ -84,8 +84,8 @@ for i in lis:
 
 
 # df=pd.read_csv("nifty_100.csv")
-import time
-start_tim = time.time()
+# import time
+# start_tim = time.time()
 for i in range(1):
     lisss=[]
     url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
@@ -106,8 +106,8 @@ gdf=pd.read_csv("nifty_100.csv")
 # New dataframe by appending real-time price 
 gdf['Price']=lisss
 
-end_tim = time.time()
-print('Duration: {}'.format(end_tim - start_tim))
+# end_tim = time.time()
+# print('Duration: {}'.format(end_tim - start_tim))
 
 pd.set_option('display.max_rows', None)
 trs=gdf.T
@@ -121,8 +121,8 @@ result = pd.concat([di, trp], ignore_index=True)
 final_da=result.drop(len(result)-2)
 final_data=final_da.fillna(0)
     
-end_tim = time.time()
-print('Duration: {}'.format(end_tim - start_tim))
+# end_tim = time.time()
+# print('Duration: {}'.format(end_tim - start_tim))
 
 
 
