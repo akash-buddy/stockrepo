@@ -1,11 +1,11 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from datetime import datetime
-import pandas_datareader as web
-import yfinance as yf
-import time
-import requests
-from bs4 import BeautifulSoup
-import streamlit as st
-from PIL import Image
+pandas
+numpy
+matplotlib.pyplot
+datetime
+pandas_datareader
+yfinance
+time
+requests
+bs4
+streamlit
+PIL
