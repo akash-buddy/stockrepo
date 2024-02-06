@@ -1,6 +1,6 @@
 pandas
 numpy
-matplotlib.pyplot
+matplotlib==3.6.1
 datetime
 pandas_datareader
 yfinance
