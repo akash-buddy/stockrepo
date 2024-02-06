@@ -76,7 +76,7 @@ def get_stock_data(ticker, start_date, end_date):
     return stock_data
 
 start_date = '2023-01-01'
-end_date = '2024-02-05'
+end_date = datetime.now()
 for i in lis:
     data = get_stock_data(i, start_date, end_date)
     di[sl[lis.index(i)]]=data["Close"]                # yfinn data
