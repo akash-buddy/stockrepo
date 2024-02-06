@@ -7,7 +7,15 @@ import yfinance as yf
 import time
 import requests
 from bs4 import BeautifulSoup
+import streamlit as st
+from PIL import Image
 
+
+st.set_page_config(
+    page_title='Akku-Dashboard',
+    layout='wide'
+)
+st.title('Stocks')
 
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
@@ -194,21 +202,25 @@ for i in sl:
 
 gdf["Recommended"]=oppo
 
-print(" "*1)
-print(" 1 👈 For Buying stocks ")
-print(" 2 👈 For Selling stocks ")
-print(" 3 👈 For Opportunity stocks ")
-print(" "*1)
-print("#"*84)
-print(" "*1)
-cek=int(input("Choose number to see stocks -->"))
-print(" "*1)
-print("#"*84)
-print(" "*1)
-if cek==1:
-    stocks=gdf[gdf["Recommended"]=="buy"]
-elif cek==2:
-    stocks=gdf[gdf["Recommended"]=="sell"]
-else:
-    stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
-stocks
+# print(" "*1)
+# print(" 1 👈 For Buying stocks ")
+# print(" 2 👈 For Selling stocks ")
+# print(" 3 👈 For Opportunity stocks ")
+# print(" "*1)
+# print("#"*84)
+# print(" "*1)
+# cek=int(input("Choose number to see stocks -->"))
+# print(" "*1)
+# print("#"*84)
+# print(" "*1)
+# if cek==1:
+#     stocks=gdf[gdf["Recommended"]=="buy"]
+# elif cek==2:
+#     stocks=gdf[gdf["Recommended"]=="sell"]
+# else:
+#     stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
+       
+st.dataframe(gdf)
+
+
+
