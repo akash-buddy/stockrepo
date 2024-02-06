@@ -129,12 +129,11 @@ print('Duration: {}'.format(end_tim - start_tim))
 
 
 oppo=[]
-print(" "*1)
-print("#"*84)
-print(" "*1)
-moving_window1=int(input("Enter Big moving Average --> "))
-print(" "*1)
-moving_window2=int(input("Enter small moving Average --> "))
+titl1 = st.text_input("Enter Big moving Average --> ")
+moving_window1=int(titl1)
+
+titl2 = st.text_input("Enter Small moving Average --> ")
+moving_window2=int(titl2)
 print(" "*1)
 print("#"*84)
 print(" "*1)
