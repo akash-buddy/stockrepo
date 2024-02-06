@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import pandas_datareader as web
 import yfinance as yf
-import time
+# import time
 import requests
 from bs4 import BeautifulSoup
 import streamlit as st
-from PIL import Image
+# from PIL import Image
 
 
 st.set_page_config(
