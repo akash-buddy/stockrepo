@@ -202,7 +202,7 @@ if st.button("Predict Calories Burnt"):
                 oppo.append("Wait for opportunity")
 
 
-gdf["Recommended"]=oppo
+    gdf["Recommended"]=oppo
 
 # print(" "*1)
 # print(" 1 👈 For Buying stocks ")
@@ -221,8 +221,8 @@ gdf["Recommended"]=oppo
 #     stocks=gdf[gdf["Recommended"]=="sell"]
 # else:
 #     stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
-       
-st.dataframe(gdf)
+    
+    st.dataframe(gdf)
 
 
 
