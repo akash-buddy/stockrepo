@@ -76,10 +76,10 @@ di= pd.DataFrame()
 
 start_date = '2023-01-01'
 end_date = '2024-02-05'
-for i in range(1):
-    for i in lis:
-        data = yf.download(i, start=start_date, end=end_date)
-        di[sl[lis.index(i)]]=data["Close"]                # yfinn data
+
+for i in lis:
+    data = yf.download(i, start=start_date, end=end_date)
+    di[sl[lis.index(i)]]=data["Close"]                # yfinn data
 
 
 
