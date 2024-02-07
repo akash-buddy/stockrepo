@@ -121,7 +121,7 @@ result = pd.concat([di, trp], ignore_index=True)
 final_da=result.drop(len(result)-2)
 final_data=final_da.fillna(0)
 st.dataframe(final_data)
-
+print(len(final_data)
 # end_tim = time.time()
 # print('Duration: {}'.format(end_tim - start_tim))
 
@@ -148,14 +148,14 @@ if st.button("Predict Calories Burnt"):
         f1=round(ma1[len(ma1)],2)
         ma2 =final_data[i].rolling(moving_window2).mean()
         f2=round(ma2[len(ma1)],2)
-        if (final_data.at[268,i]>=0) and (final_data.at[268,i]<=100):
+        if (final_data.at[len(final_data),i]>=0) and (final_data.at[len(final_data),i]<=100):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-3) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 3 ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
-        elif (final_data.at[268,i]>=101) and (final_data.at[268,i]<=200):
+        elif (final_data.at[len(final_data),i]>=101) and (final_data.at[len(final_data),i]<=200):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-5) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 5 ) :
