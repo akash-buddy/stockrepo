@@ -12,7 +12,7 @@ import streamlit as st
 
 
 st.set_page_config(
-    page_title='Akku-Dashboard',
+    page_title='Akash-Trader',
     layout='wide'
 )
 
