@@ -15,18 +15,22 @@ st.set_page_config(
     page_title='Akku-Dashboard',
     layout='wide'
 )
-st.title('Stocks')
 
-# titl1 = st.text_input("Enter Big moving Average --> ")
-moving1= st.number_input("Enter Big moving Average")
+coll1,coll2,coll3=st.columns([2,3,1])
+with coll2:
+    st.title("Stocks")
 
-# titl2 = st.text_input("Enter Small moving Average --> ")
-moving2=st.number_input("Enter Small moving Average")
-# print(" "*1)
-# print("#"*84)
-# print(" "*1)
-moving_window1=int(moving1)
-moving_window2=int(moving2)
+col1,col2=st.columns(2)
+
+with col1:
+    moving1= st.number_input("Enter Big moving Average")
+    moving_window1=int(moving1)
+
+with col1:
+    moving2=st.number_input("Enter Small moving Average")
+    moving_window2=int(moving2)
+
+
 
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
