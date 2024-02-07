@@ -121,7 +121,7 @@ result = pd.concat([di, trp], ignore_index=True)
 final_da=result.drop(len(result)-2)
 final_data=final_da.fillna(0)
 st.dataframe(final_data)
-print(len(final_data)
+# print(len(final_data)
 # end_tim = time.time()
 # print('Duration: {}'.format(end_tim - start_tim))
 
