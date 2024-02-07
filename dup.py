@@ -213,13 +213,13 @@ if st.button("Refresh"):
         st.dataframe(gdf)
     elif filtter=="Buy":
         stocks=gdf[gdf["Recommended"]=="buy"]
-        st.dataframe(stocks)
+        st.dataframe(stocks, use_container_width=True, index=False)
     elif filtter=="Sell":
         stocks=gdf[gdf["Recommended"]=="sell"]
-        st.dataframe(stocks)
+        st.dataframe(stocks, use_container_width=True, index=False)
     else:
         stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
-        st.dataframe(stocks)
+        st.dataframe(stocks, use_container_width=True, index=False)
         
 # print(" "*1)
 # print(" 1 👈 For Buying stocks ")
