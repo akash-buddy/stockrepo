@@ -131,10 +131,10 @@ trp
 
 # oppo=[]
 # titl1 = st.text_input("Enter Big moving Average --> ")
-moving_window1= st.number_input("Enter Big moving Average", value=None)
+moving_window1= st.number_input("Enter Big moving Average")
 
 # titl2 = st.text_input("Enter Small moving Average --> ")
-moving_window2=st.number_input("Enter Small moving Average", value=None)
+moving_window2=st.number_input("Enter Small moving Average")
 # print(" "*1)
 # print("#"*84)
 # print(" "*1)
