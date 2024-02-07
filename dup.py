@@ -71,14 +71,13 @@ sl=['Abbott India', 'ACC', 'Adani Energy Solut.', 'Adani Green Energy',
 # start_tim = time.time()
 print("Expected time to download data ==> 1 Minute")
 di= pd.DataFrame()
-def get_stock_data(ticker, start_date, end_date):
-    stock_data = yf.download(ticker, start=start_date, end=end_date)
-    return stock_data
+
+
 
 start_date = '2023-01-01'
 end_date = '2024-02-05'
 for i in lis:
-    data = get_stock_data(i, start_date, end_date)
+    data = yf.download(i, start=start_date, end=end_date)
     di[sl[lis.index(i)]]=data["Close"]                # yfinn data
 
 
