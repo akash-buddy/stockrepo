@@ -17,7 +17,7 @@ st.set_page_config(
 )
 
 coll1,coll2,coll3=st.columns([2,3,1])
-with coll2:
+with coll1:
     st.title("Stocks")
 
 col1,col2=st.columns(2)
@@ -25,12 +25,14 @@ col1,col2=st.columns(2)
 with col1:
     moving1= st.number_input("Enter Big moving Average")
     moving_window1=int(moving1)
-
-with col1:
+col11,col12=st.columns(2)
+with col11:
     moving2=st.number_input("Enter Small moving Average")
     moving_window2=int(moving2)
+col21,col22=st.columns(2)
 
-
+with col21:
+    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
 
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
@@ -207,7 +209,18 @@ if st.button("Refresh"):
 
 
     gdf["Recommended"]=oppo
-    st.dataframe(gdf)
+    if filtter=="All":
+        st.dataframe(gdf)
+    elif filtter=="Buy":
+        stocks=gdf[gdf["Recommended"]=="buy"]
+        st.dataframe(stocks)
+    elif filtter=="Sell":
+        stocks=gdf[gdf["Recommended"]=="sell"]
+        st.dataframe(stocks)
+    else:
+        stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
+        st.dataframe(stocks)
+        
 # print(" "*1)
 # print(" 1 👈 For Buying stocks ")
 # print(" 2 👈 For Selling stocks ")
