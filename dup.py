@@ -76,9 +76,10 @@ di= pd.DataFrame()
 
 start_date = '2023-01-01'
 end_date = '2024-02-05'
-for i in lis:
-    data = yf.download(i, start=start_date, end=end_date)
-    di[sl[lis.index(i)]]=data["Close"]                # yfinn data
+for i in range(1):
+    for i in lis:
+        data = yf.download(i, start=start_date, end=end_date)
+        di[sl[lis.index(i)]]=data["Close"]                # yfinn data
 
 
 
@@ -130,10 +131,10 @@ st.dataframe(final_data)
 
 # oppo=[]
 # titl1 = st.text_input("Enter Big moving Average --> ")
-moving_window1= st.number_input("Big moving Average", value=None, placeholder="Enter moving Average...")
+moving_window1= st.number_input("Enter Big moving Average", value=None")
 
 # titl2 = st.text_input("Enter Small moving Average --> ")
-moving_window2=st.number_input("Small moving Average", value=None, placeholder="Enter moving Average...")
+moving_window2=st.number_input("Enter Small moving Average", value=None")
 # print(" "*1)
 # print("#"*84)
 # print(" "*1)
