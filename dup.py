@@ -161,7 +161,7 @@ if st.button("Predict Calories Burnt"):
             else:
                 oppo.append("Wait for opportunity")
     
-        elif (final_data.at[len(final_data),k]>=201) and (final_data.at[268,k]<=500):
+        elif (final_data.at[len(final_data),k]>=201) and (final_data.at[len(final_data),k]<=500):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-10) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 10 ) :
