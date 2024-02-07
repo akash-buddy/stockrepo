@@ -129,7 +129,7 @@ st.dataframe(final_data)
 
 
 
-# oppo=[]
+oppo=[]
 # titl1 = st.text_input("Enter Big moving Average --> ")
 moving_window1= st.number_input("Enter Big moving Average")
 
