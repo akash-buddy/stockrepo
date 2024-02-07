@@ -17,6 +17,17 @@ st.set_page_config(
 )
 st.title('Stocks')
 
+# titl1 = st.text_input("Enter Big moving Average --> ")
+moving1= st.number_input("Enter Big moving Average")
+
+# titl2 = st.text_input("Enter Small moving Average --> ")
+moving2=st.number_input("Enter Small moving Average")
+# print(" "*1)
+# print("#"*84)
+# print(" "*1)
+moving_window1=int(moving1)
+moving_window2=int(moving2)
+
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
        'ADANIPORTS.NS', 'ALKEM.NS', 'AMBUJACEM.NS', 'ASIANPAINT.NS',
@@ -73,74 +84,63 @@ print("Expected time to download data ==> 1 Minute")
 di= pd.DataFrame()
 
 
-
-start_date = '2023-01-01'
-end_date = datetime.now()
-
-for i in lis:
-    data = yf.download(i, start=start_date, end=end_date)
-    di[sl[lis.index(i)]]=data["Close"]                # yfinn data
-
-
-
-# df=pd.read_csv("nifty_100.csv")
-# import time
-# start_tim = time.time()
-for i in range(1):
-    lisss=[]
-    url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
-    webpag=requests.get(url).text
-    souppp=BeautifulSoup(webpag,'lxml')
-    s=souppp.find_all('div',class_="st76CurrVal bodyBaseHeavy")
-
-    for j in range(len(s)):
-        d=s[j].text
-        removequma=d.replace(",","")
-        removerupee=removequma.replace("₹","")
-        lisss.append(float(removerupee))
-
-#loading dataframe with Name and url-name
-gdf=pd.read_csv("nifty_100.csv")
-
-
-# New dataframe by appending real-time price 
-gdf['Price']=lisss
-
-# end_tim = time.time()
-# print('Duration: {}'.format(end_tim - start_tim))
-
-pd.set_option('display.max_rows', None)
-trs=gdf.T
-trs.columns = trs.iloc[0]
-trp = trs[2:]
-trp
-
-
-# Concatinating both dataframe: yfin + grow
-result = pd.concat([di, trp], ignore_index=True)
-final_da=result.drop(len(result)-2)
-final_data=final_da.fillna(0)
-st.dataframe(final_data)
-st.write(f"DataFrame Length: {len(final_data)}")
+if st.button("Refresh"):
+    start_date = '2023-01-01'
+    end_date = datetime.now()
+    
+    for i in lis:
+        data = yf.download(i, start=start_date, end=end_date)
+        di[sl[lis.index(i)]]=data["Close"]                # yfinn data
+    
+    
+    
+    
+    for i in range(1):
+        lisss=[]
+        url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
+        webpag=requests.get(url).text
+        souppp=BeautifulSoup(webpag,'lxml')
+        s=souppp.find_all('div',class_="st76CurrVal bodyBaseHeavy")
+    
+        for j in range(len(s)):
+            d=s[j].text
+            removequma=d.replace(",","")
+            removerupee=removequma.replace("₹","")
+            lisss.append(float(removerupee))
+    
+    #loading dataframe with Name and url-name
+    gdf=pd.read_csv("nifty_100.csv")
+    
+    
+    # New dataframe by appending real-time price 
+    gdf['Price']=lisss
+    
+    # end_tim = time.time()
+    # print('Duration: {}'.format(end_tim - start_tim))
+    
+    pd.set_option('display.max_rows', None)
+    trs=gdf.T
+    trs.columns = trs.iloc[0]
+    trp = trs[2:]
+    trp
+    
+    
+    # Concatinating both dataframe: yfin + grow
+    result = pd.concat([di, trp], ignore_index=True)
+    final_da=result.drop(len(result)-2)
+    final_data=final_da.fillna(0)
+    st.dataframe(final_data)
+    st.write(f"DataFrame Length: {len(final_data)}")
 
 
 
 
 
-oppo=[]
-# titl1 = st.text_input("Enter Big moving Average --> ")
-moving1= st.number_input("Enter Big moving Average")
 
-# titl2 = st.text_input("Enter Small moving Average --> ")
-moving2=st.number_input("Enter Small moving Average")
-# print(" "*1)
-# print("#"*84)
-# print(" "*1)
-moving_window1=int(moving1)
-moving_window2=int(moving2)
+
 
 if st.button("Predict Calories Burnt"):
-    
+    oppo=[]
     for k in sl:
         ma1 =final_data[k].rolling(moving_window1).mean()
         f1=round(ma1[len(ma1)],2)
