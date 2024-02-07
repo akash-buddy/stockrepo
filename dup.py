@@ -131,13 +131,15 @@ st.dataframe(final_data)
 
 oppo=[]
 # titl1 = st.text_input("Enter Big moving Average --> ")
-moving_window1= st.number_input("Enter Big moving Average")
+moving1= st.number_input("Enter Big moving Average")
 
 # titl2 = st.text_input("Enter Small moving Average --> ")
-moving_window2=st.number_input("Enter Small moving Average")
+moving2=st.number_input("Enter Small moving Average")
 # print(" "*1)
 # print("#"*84)
 # print(" "*1)
+moving_window1=int(moving1)
+moving_window2=int(moving2)
 
 if st.button("Predict Calories Burnt"):
     
