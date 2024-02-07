@@ -141,19 +141,19 @@ moving_window2=int(moving2)
 
 if st.button("Predict Calories Burnt"):
     
-    for i in sl:
-        ma1 =final_data[i].rolling(moving_window1).mean()
+    for k in sl:
+        ma1 =final_data[k].rolling(moving_window1).mean()
         f1=round(ma1[len(ma1)],2)
-        ma2 =final_data[i].rolling(moving_window2).mean()
+        ma2 =final_data[k].rolling(moving_window2).mean()
         f2=round(ma2[len(ma1)],2)
-        if (final_data.at[len(final_data),i]>=0) and (final_data.at[len(final_data),i]<=100):
+        if (final_data.at[len(final_data),k]>=0) and (final_data.at[len(final_data),k]<=100):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-3) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 3 ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
-        elif (final_data.at[len(final_data),i]>=101) and (final_data.at[len(final_data),i]<=200):
+        elif (final_data.at[len(final_data),k]>=101) and (final_data.at[len(final_data),k]<=200):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-5) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 5 ) :
@@ -161,7 +161,7 @@ if st.button("Predict Calories Burnt"):
             else:
                 oppo.append("Wait for opportunity")
     
-        elif (final_data.at[len(final_data),i]>=201) and (final_data.at[268,i]<=500):
+        elif (final_data.at[len(final_data),k]>=201) and (final_data.at[268,k]<=500):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-10) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 10 ) :
@@ -169,7 +169,7 @@ if st.button("Predict Calories Burnt"):
             else:
                 oppo.append("Wait for opportunity")
     
-        elif (final_data.at[len(final_data),i]>=501) and (final_data.at[len(final_data),i]<=1000):
+        elif (final_data.at[len(final_data),k]>=501) and (final_data.at[len(final_data),k]<=1000):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-15) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 15 ) :
@@ -177,7 +177,7 @@ if st.button("Predict Calories Burnt"):
             else:
                 oppo.append("Wait for opportunity")
     
-        elif (final_data.at[len(final_data),i]>=1001) and (final_data.at[len(final_data),i]<=2000):
+        elif (final_data.at[len(final_data),k]>=1001) and (final_data.at[len(final_data),k]<=2000):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-20) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 20 ) :
@@ -185,7 +185,7 @@ if st.button("Predict Calories Burnt"):
             else:
                 oppo.append("Wait for opportunity")
     
-        elif (final_data.at[len(final_data),i]>=2001) and (final_data.at[len(final_data),i]<=5000):
+        elif (final_data.at[len(final_data),k]>=2001) and (final_data.at[len(final_data),k]<=5000):
             if ((f1-f2) <= 0) and ((f1-f2) >= (-25) ) :
                 oppo.append("buy")
             elif ((f1-f2) >= 0) and ((f1-f2) <= 25 ) :
