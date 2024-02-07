@@ -210,7 +210,7 @@ if st.button("Refresh"):
 
     gdf["Recommended"]=oppo
     if filtter=="All":
-        st.table(gdf)
+        st.dataframe(gdf)
     elif filtter=="Buy":
         stocks=gdf[gdf["Recommended"]=="buy"]
         st.dataframe(stocks, use_container_width=True)
