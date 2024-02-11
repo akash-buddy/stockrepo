@@ -32,8 +32,8 @@ with col11:
     moving_window2=int(moving2)
 col21,col22=st.columns(2)
 
-# with col21:
-#     filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
+with col21:
+    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
 
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
