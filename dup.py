@@ -89,19 +89,15 @@ sl=['Abbott India', 'ACC', 'Adani Energy Solut.', 'Adani Green Energy',
 # start_tim = time.time()
 print("Expected time to download data ==> 1 Minute")
 di= pd.DataFrame()
-start_date = '2023-01-01'
-end_date = datetime.now()
-for i in lis:
-    data = yf.download(i, start=start_date, end=end_date)
-    di[sl[lis.index(i)]]=data["Close"] 
+
 
 if st.button("Refresh"):
-    # start_date = '2023-01-01'
-    # end_date = datetime.now()
+    start_date = '2023-01-01'
+    end_date = datetime.now()
     
-    # for i in lis:
-    #     data = yf.download(i, start=start_date, end=end_date)
-    #     di[sl[lis.index(i)]]=data["Close"]                # yfinn data
+    for i in lis:
+        data = yf.download(i, start=start_date, end=end_date)
+        di[sl[lis.index(i)]]=data["Close"]                # yfinn data
     
     
     
