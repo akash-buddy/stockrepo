@@ -32,8 +32,8 @@ with col11:
     moving_window2=int(moving2)
 col21,col22=st.columns(2)
 
-with col21:
-    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
+# with col21:
+#     filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
 
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
@@ -208,19 +208,20 @@ if st.button("Refresh"):
             else:
                 oppo.append("Wait for opportunity")
 
-
-    gdf["Recommended"]=oppo
-    if filtter=="All":
-        st.dataframe(gdf)
-    elif filtter=="Buy":
-        stocks=gdf[gdf["Recommended"]=="buy"]
-        st.dataframe(stocks, use_container_width=True)
-    elif filtter=="Sell":
-        stocks=gdf[gdf["Recommended"]=="sell"]
-        st.dataframe(stocks, use_container_width=True)
-    else:
-        stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
-        st.dataframe(stocks, use_container_width=True)
+with col21:
+    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
+gdf["Recommended"]=oppo
+if filtter=="All":
+    st.dataframe(gdf)
+elif filtter=="Buy":
+    stocks=gdf[gdf["Recommended"]=="buy"]
+    st.dataframe(stocks, use_container_width=True)
+elif filtter=="Sell":
+    stocks=gdf[gdf["Recommended"]=="sell"]
+    st.dataframe(stocks, use_container_width=True)
+else:
+    stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
+    st.dataframe(stocks, use_container_width=True)
         
 # print(" "*1)
 # print(" 1 👈 For Buying stocks ")
