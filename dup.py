@@ -207,10 +207,11 @@ if st.button("Refresh"):
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
+    gdf["Recommended"]=oppo
 
 with col21:
     filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
-gdf["Recommended"]=oppo
+# gdf["Recommended"]=oppo
 if filtter=="All":
     st.dataframe(gdf)
 elif filtter=="Buy":
