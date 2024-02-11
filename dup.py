@@ -25,6 +25,7 @@ col1,col2=st.columns(2)
 with col1:
     moving1= st.number_input("Enter Big moving Average")
     moving_window1=int(moving1)
+st.write(moving_window1)
 col11,col12=st.columns(2)
 with col11:
     moving2=st.number_input("Enter Small moving Average")
