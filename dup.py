@@ -151,8 +151,10 @@ if st.button("Refresh"):
     for k in sl:
         ma1 =final_data[k].rolling(moving_window1).mean()
         f1=round(ma1[len(ma1)],2)
+        st.write(f1)
         ma2 =final_data[k].rolling(moving_window2).mean()
         f2=round(ma2[len(ma1)],2)
+        st.write(f2)
         if (final_data.at[len(final_data),k]>=0) and (final_data.at[len(final_data),k]<=100):
             if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
                 oppo.append("buy")
