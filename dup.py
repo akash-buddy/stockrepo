@@ -153,56 +153,56 @@ if st.button("Refresh"):
         ma2 =final_data[k].rolling(moving_window2).mean()
         f2=round(ma2[len(ma1)],2)
         if (final_data.at[len(final_data),k]>=0) and (final_data.at[len(final_data),k]<=100):
-            if ((f1-f2) <= 0) and ((f1-f2) >= (-3) ) :
+            if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
                 oppo.append("buy")
-            elif ((f1-f2) >= 0) and ((f1-f2) <= 3 ) :
+            elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
         elif (final_data.at[len(final_data),k]>=101) and (final_data.at[len(final_data),k]<=200):
-            if ((f1-f2) <= 0) and ((f1-f2) >= (-5) ) :
+            if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
                 oppo.append("buy")
-            elif ((f1-f2) >= 0) and ((f1-f2) <= 5 ) :
+            elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
     
         elif (final_data.at[len(final_data),k]>=201) and (final_data.at[len(final_data),k]<=500):
-            if ((f1-f2) <= 0) and ((f1-f2) >= (-10) ) :
+            if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
                 oppo.append("buy")
-            elif ((f1-f2) >= 0) and ((f1-f2) <= 10 ) :
+            elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
     
         elif (final_data.at[len(final_data),k]>=501) and (final_data.at[len(final_data),k]<=1000):
-            if ((f1-f2) <= 0) and ((f1-f2) >= (-15) ) :
+            if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (4) ) :
                 oppo.append("buy")
-            elif ((f1-f2) >= 0) and ((f1-f2) <= 15 ) :
+            elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-4) ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
     
         elif (final_data.at[len(final_data),k]>=1001) and (final_data.at[len(final_data),k]<=2000):
-            if ((f1-f2) <= 0) and ((f1-f2) >= (-20) ) :
+            if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (5) ) :
                 oppo.append("buy")
-            elif ((f1-f2) >= 0) and ((f1-f2) <= 20 ) :
+            elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-5) ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
     
         elif (final_data.at[len(final_data),k]>=2001) and (final_data.at[len(final_data),k]<=5000):
-            if ((f1-f2) <= 0) and ((f1-f2) >= (-25) ) :
+            if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (10) ) :
                 oppo.append("buy")
-            elif ((f1-f2) >= 0) and ((f1-f2) <= 25 ) :
+            elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-10) ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
     
         else :
-            if ((f1-f2) <= 0) and ((f1-f2) >= (50) ) :
+            if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (15) ) : 
                 oppo.append("buy")
-            elif ((f1-f2) >= 0) and ((f1-f2) <= 50 ) :
+            elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-15) ) :
                 oppo.append("sell")
             else:
                 oppo.append("Wait for opportunity")
