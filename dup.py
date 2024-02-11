@@ -18,14 +18,14 @@ st.set_page_config(
 
 coll1,coll2,coll3=st.columns([2,3,1])
 with coll1:
-    st.title("Stocks")
+    st.title("Test Your Moving Average")
 
 col1,col2=st.columns(2)
 
 with col1:
     moving1= st.number_input("Enter Big moving Average")
     moving_window1=int(moving1)
-st.write(moving_window1)
+
 col11,col12=st.columns(2)
 with col11:
     moving2=st.number_input("Enter Small moving Average")
