@@ -116,7 +116,7 @@ if st.button("Refresh"):
             lisss.append(float(removerupee))
     
     #loading dataframe with Name and url-name
-    gdf=pd.read_csv("nifty_1000.csv")
+    gdf=pd.read_csv("nifty_100.csv")
     
     
     # New dataframe by appending real-time price 
