@@ -52,7 +52,7 @@ lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
        'LUPIN.NS', 'M&M.NS', 'MARICO.NS', 'MARUTI.NS', 'MUTHOOTFIN.NS',
        'NESTLEIND.NS', 'NMDC.NS', 'NTPC.NS', 'OFSS.NS', 'ONGC.NS', 'PGHH.NS',
        'PETRONET.NS', 'PIDILITIND.NS', 'PEL.NS', 'PNB.NS', 'PFC.NS',
-       'POWERGRID.NS', 'RELIANCE.NS', 'MOTHERSON.NS', 'SBIN.NS', 'SBICARD.NS',
+       'POWERGRID.NS', 'MOTHERSON.NS', 'SBIN.NS', 'SBICARD.NS',
        'SBILIFE.NS', 'SHREECEM.NS', 'SIEMENS.NS', 'SUNPHARMA.NS',
        'TATACONSUM.NS', 'TATAMOTORS.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS',
        'TORNTPHARM.NS', 'ULTRACEMCO.NS', 'UBL.NS', 'MCDOWELL-N.NS', 'UPL.NS',
@@ -76,8 +76,8 @@ sl=['Abbott India', 'ACC', 'Adani Energy Solut.', 'Adani Green Energy',
        'Lupin', 'Mahindra & Mahindra', 'Marico', 'Maruti Suzuki',
        'Muthoot Finance', 'Nestle India', 'NMDC', 'NTPC', 'OFSS', 'ONGC',
        'P&G', 'Petronet LNG', 'Pidilite Industries', 'Piramal Enterprises',
-       'PNB', 'Power Finance Corp', 'Power Grid Corp', 'Reliance Industries',
-       'Samvardhana Motherson', 'SBI', 'SBI Cards', 'SBI Life Insurance',
+       'PNB', 'Power Finance Corp', 'Power Grid Corp','Samvardhana Motherson', 
+       'SBI', 'SBI Cards', 'SBI Life Insurance',
        'Shree Cement', 'Siemens', 'Sun Pharmaceutical', 'Tata Consumer',
        'Tata Motors', 'TCS', 'Tech Mahindra', 'Titan', 'Torrent Pharma',
        'UltraTech Cement', 'United Breweries', 'United Spirits', 'UPL',
@@ -116,7 +116,7 @@ if st.button("Refresh"):
             lisss.append(float(removerupee))
     
     #loading dataframe with Name and url-name
-    gdf=pd.read_csv("nifty_100.csv")
+    gdf=pd.read_csv("nifty_1000.csv")
     
     
     # New dataframe by appending real-time price 
