@@ -15,9 +15,7 @@ st.set_page_config(
     page_title='Akash-Trader',
     layout='wide'
 )
-on = st.toggle('Activate feature')
-if on:
-    st.write('Activate feature')
+
 
 coll1,coll2,coll3=st.columns([2,3,1])
 with coll1:
@@ -248,8 +246,8 @@ if st.button("Refresh"):
                     with eval("c"+str(n-95)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
-            # if st.toggle('Activate feature'):
-            #     st.dataframe(dt)
+            if st.checkbox("Toggle Button"):
+                st.dataframe(dt)
 
         
         if filtter=="Top-10 Gainers":
