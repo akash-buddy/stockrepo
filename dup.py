@@ -201,6 +201,17 @@ if st.button("Refresh"):
         dt["Recommended"]=oppo
         if filtter=="All":
             st.dataframe(dt)
+            c1,c2,c3,c4,c5,c6,c7,c8,c9,c10=st.columns(10)
+            for n in range(len(dt)):
+                o1=dt.iloc[n,0]
+                o2=dt.iloc[n,1]
+                o3=dt.iloc[n,2]
+                if n<10:
+                    with eval("c"+str(n+1)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+
+
+            
             comm1,comm2 = st.columns(2)
             dx=dt.sort_values(by='Change_price')
             dy=dt.sort_values(by='Change_price',ascending=False)
