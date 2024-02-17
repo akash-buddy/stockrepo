@@ -246,9 +246,13 @@ if st.button("Refresh"):
                     with eval("c"+str(n-95)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
-            if st.toggle('Activate feature'):
+            # if st.toggle('Activate feature'):
+            #     st.dataframe(dt)
+            on = st.toggle('Activate feature')
+            if on:
                 st.dataframe(dt)
-            
+
+        
         if filtter=="Top-10 Gainers":
             comm1,comm2,comm3,comm4,comm5= st.columns(5)
             dy=dt.sort_values(by='Change_price',ascending=False)
