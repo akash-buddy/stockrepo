@@ -224,31 +224,31 @@ if st.button("Refresh"):
             # st.dataframe(stocks, use_container_width=True)
         else:
             stocks=dt[dt["Recommended"]=="Wait for opportunity"]
-            com1, com2, com3,com4,com5,com6 = st.columns(6)
-            for n in range(len(stocks)):
-                o1=stocks.iloc[n,0]
-                o2=stocks.iloc[n,1]
-                o3=stocks.iloc[n,2]
-                if n<15:
-                    with com1:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
-                elif n>=15 and n<30:
-                    with com2:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
-                elif n>=30 and n<45:
-                    with com3:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
-                elif n>=45 and n<60:
-                    with com4:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
-                elif n>=60 and n<75:
-                    with com5:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
-                elif n>=75 and n<90:
-                    with com6:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
-                else:
-                    st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            # com1, com2, com3,com4,com5,com6 = st.columns(6)
+            # for n in range(len(stocks)):
+            #     o1=stocks.iloc[n,0]
+            #     o2=stocks.iloc[n,1]
+            #     o3=stocks.iloc[n,2]
+            #     if n<15:
+            #         with com1:
+            #             st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            #     elif n>=15 and n<30:
+            #         with com2:
+            #             st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            #     elif n>=30 and n<45:
+            #         with com3:
+            #             st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            #     elif n>=45 and n<60:
+            #         with com4:
+            #             st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            #     elif n>=60 and n<75:
+            #         with com5:
+            #             st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            #     elif n>=75 and n<90:
+            #         with com6:
+            #             st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            #     else:
+            #         st.metric(label=o1, value=f"₹{o2}", delta=o3)
 
             st.dataframe(stocks, use_container_width=True)
 
