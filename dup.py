@@ -210,7 +210,7 @@ if st.button("Refresh"):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
-                com[i+1].st.metric(label=o1, value=f"₹{o2}", delta=f"₹{o3}") 
+                com[i+1].st.metric(label=o1, value=f"₹{o2}", delta=f"{o3} ₹") 
         
             # st.dataframe(stocks, use_container_width=True)
         elif filtter=="Sell":
@@ -219,7 +219,7 @@ if st.button("Refresh"):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
-                st.metric(label=o1, value=f"₹{o2}", delta=f"₹{o3}")
+                st.metric(label=o1, value=f"₹{o2}", delta=o3)
         
             # st.dataframe(stocks, use_container_width=True)
         else:
@@ -228,7 +228,7 @@ if st.button("Refresh"):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
-                st.metric(label=o1, value=f"₹{o2}", delta=f"₹{o3}")
+                st.metric(label=o1, value=f"₹{o2}", delta=o3)
 
 
 
