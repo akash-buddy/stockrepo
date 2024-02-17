@@ -242,7 +242,9 @@ if st.button("Refresh"):
                 elif n>=88 and n<96:
                     with eval("c"+str(n-87)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-
+                elif n>=96 and n<100:
+                    with eval("c"+str(n-95)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
         if filtter=="Top-10 Gainers":
             comm1,comm2,comm3,comm4,comm5= st.columns(5)
