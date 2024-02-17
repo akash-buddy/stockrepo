@@ -212,12 +212,36 @@ if st.button("Refresh"):
                 elif n>=8 and n<16:
                     with eval("c"+str(n-7)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-
-
-
-
-
-
+                elif n>=16 and n<24:
+                    with eval("c"+str(n-15)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=24 and n<32:
+                    with eval("c"+str(n-23)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=32 and n<40:
+                    with eval("c"+str(n-31)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=40 and n<48:
+                    with eval("c"+str(n-39)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=48 and n<56:
+                    with eval("c"+str(n-47)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=56 and n<64:
+                    with eval("c"+str(n-55)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=64 and n<72:
+                    with eval("c"+str(n-63)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=72 and n<80:
+                    with eval("c"+str(n-71)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=80 and n<88:
+                    with eval("c"+str(n-79)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=88 and n<96:
+                    with eval("c"+str(n-87)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
 
             
