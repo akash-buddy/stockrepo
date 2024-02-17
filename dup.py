@@ -218,7 +218,7 @@ if st.button("Refresh"):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
-                st.metric(label=o1, value=o2, delta=o3)
+                st.metric(label=o1, value='$'+ o2, delta=o3)
         
             # st.dataframe(stocks, use_container_width=True)
         else:
