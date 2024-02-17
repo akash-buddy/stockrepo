@@ -34,7 +34,7 @@ with col11:
 col21,col22=st.columns(2)
 
 with col21:
-    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Wait for opportunity'])
+    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell'])
 
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
