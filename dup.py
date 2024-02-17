@@ -16,6 +16,12 @@ st.set_page_config(
     layout='wide'
 )
 
+label_text = "Your Label"
+metric_value = 42
+st.metric(label_text, f"<b>{metric_value}</b>")
+
+# Use st.markdown to include HTML tags for bold within st.metric
+st.metric(label_text, f"<b>{metric_value}</b>")
 
 coll1,coll2,coll3=st.columns([2,3,1])
 with coll1:
