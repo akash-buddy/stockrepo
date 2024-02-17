@@ -18,7 +18,7 @@ st.set_page_config(
 
 
 coll1,coll2,coll3=st.columns([3,2,1])
-with coll2:
+with coll1:
     st.title("Try Your Moving Average")
 
 col1,col2=st.columns(2)
