@@ -201,9 +201,12 @@ if st.button("Refresh"):
         dt["Recommended"]=oppo
         if filtter=="All":
             st.dataframe(dt)
-            dy=dt.sort_values(by='Change_price')
             comm1,comm2 = st.columns(2)
-            comm1.dataframe(dy)
+            comm1.dataframe(dt.sort_values(by='Change_price'))
+            comm2.dataframe(dt.sort_values(by='Change_price',ascending=False))
+            
+
+        
         elif filtter=="Buy":
             stocks=dt[dt["Recommended"]=="buy"]
             com1, com2, com3,com4,com5 = st.columns(5)
