@@ -209,7 +209,9 @@ if st.button("Refresh"):
                 if n<8:
                     with eval("c"+str(n+1)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-
+                elif n>=8 and n<16:
+                    with eval("c"+str(n-7)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
 
 
