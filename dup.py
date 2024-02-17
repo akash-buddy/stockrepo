@@ -220,11 +220,12 @@ if st.button("Refresh"):
             # st.dataframe(stocks, use_container_width=True)
         elif filtter=="Sell":
             stocks=dt[dt["Recommended"]=="sell"]
+            com1, com2, com3,com4,com5 = st.columns(5)
             for n in range(len(stocks)):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
-                st.metric(label=o1, value=f"₹{o2}", delta=o3)
+                eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
         
             # st.dataframe(stocks, use_container_width=True)
         else:
