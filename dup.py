@@ -210,9 +210,9 @@ if st.button("Refresh"):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
-                if n==1:
+                if n==0:
                     com1.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
-                if n==2:
+                if n==1:
                     com2.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
             # st.dataframe(stocks, use_container_width=True)
         elif filtter=="Sell":
