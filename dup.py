@@ -61,81 +61,103 @@ lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
        'TORNTPHARM.NS', 'ULTRACEMCO.NS', 'UBL.NS', 'MCDOWELL-N.NS', 'UPL.NS',
        'WIPRO.NS', 'ZYDUSLIFE.NS']
 
-sl=['Abbott India', 'ACC', 'Adani Energy Solut.', 'Adani Green Energy',
-       'Adani Ports', 'Alkem Laboratories', 'Ambuja Cements', 'Asian Paints',
-       'Aurobindo Pharma', 'Avenue Supermarts', 'Axis Bank', 'Bajaj Auto',
-       'Bajaj Finance', 'Bajaj Holdings', 'Bandhan Bank', 'Bank of Baroda',
-       'Berger Paints', 'Bharti Airtel', 'Biocon', 'Bosch', 'BPCL',
-       'Britannia Industries', 'Cipla', 'Coal India', 'Colgate-Palmolive',
-       'Container Corp', 'Dabur India', "Divi's Labs", 'DLF',
-       "Dr Reddy's Labs", 'Eicher Motors', 'GAIL (India)', 'General Insurance',
-       'Godrej Consumer', 'Grasim Industries', 'Havells India',
-       'HCL Technologies', 'HDFC Asset Mgmt Co', 'HDFC Bank',
-       'HDFC Life Insurance', 'Hero MotoCorp', 'Hindalco',
-       'Hindustan Unilever', 'Hindustan Zinc', 'HPCL', 'ICICI Bank',
-       'ICICI Lombard', 'ICICI Prudential', 'Indraprastha Gas', 'Indus Towers',
-       'IndusInd Bank', 'Info Edge (India)', 'Infosys', 'Interglobe Aviation',
-       'IOCL', 'ITC', 'JSW Steel', 'Kotak Mahindra Bank', 'L&T', 'LTIMindtree',
-       'Lupin', 'Mahindra & Mahindra', 'Marico', 'Maruti Suzuki',
-       'Muthoot Finance', 'Nestle India', 'NMDC', 'NTPC', 'OFSS', 'ONGC',
-       'P&G', 'Petronet LNG', 'Pidilite Industries', 'Piramal Enterprises',
-       'PNB', 'Power Finance Corp', 'Power Grid Corp','Reliance Industries','Samvardhana Motherson', 
-       'SBI', 'SBI Cards', 'SBI Life Insurance',
-       'Shree Cement', 'Siemens', 'Sun Pharmaceutical', 'Tata Consumer',
-       'Tata Motors', 'TCS', 'Tech Mahindra', 'Titan', 'Torrent Pharma',
-       'UltraTech Cement', 'United Breweries', 'United Spirits', 'UPL',
-       'Wipro', 'Zydus']
+# sl=['Abbott India', 'ACC', 'Adani Energy Solut.', 'Adani Green Energy',
+#        'Adani Ports', 'Alkem Laboratories', 'Ambuja Cements', 'Asian Paints',
+#        'Aurobindo Pharma', 'Avenue Supermarts', 'Axis Bank', 'Bajaj Auto',
+#        'Bajaj Finance', 'Bajaj Holdings', 'Bandhan Bank', 'Bank of Baroda',
+#        'Berger Paints', 'Bharti Airtel', 'Biocon', 'Bosch', 'BPCL',
+#        'Britannia Industries', 'Cipla', 'Coal India', 'Colgate-Palmolive',
+#        'Container Corp', 'Dabur India', "Divi's Labs", 'DLF',
+#        "Dr Reddy's Labs", 'Eicher Motors', 'GAIL (India)', 'General Insurance',
+#        'Godrej Consumer', 'Grasim Industries', 'Havells India',
+#        'HCL Technologies', 'HDFC Asset Mgmt Co', 'HDFC Bank',
+#        'HDFC Life Insurance', 'Hero MotoCorp', 'Hindalco',
+#        'Hindustan Unilever', 'Hindustan Zinc', 'HPCL', 'ICICI Bank',
+#        'ICICI Lombard', 'ICICI Prudential', 'Indraprastha Gas', 'Indus Towers',
+#        'IndusInd Bank', 'Info Edge (India)', 'Infosys', 'Interglobe Aviation',
+#        'IOCL', 'ITC', 'JSW Steel', 'Kotak Mahindra Bank', 'L&T', 'LTIMindtree',
+#        'Lupin', 'Mahindra & Mahindra', 'Marico', 'Maruti Suzuki',
+#        'Muthoot Finance', 'Nestle India', 'NMDC', 'NTPC', 'OFSS', 'ONGC',
+#        'P&G', 'Petronet LNG', 'Pidilite Industries', 'Piramal Enterprises',
+#        'PNB', 'Power Finance Corp', 'Power Grid Corp','Reliance Industries','Samvardhana Motherson', 
+#        'SBI', 'SBI Cards', 'SBI Life Insurance',
+#        'Shree Cement', 'Siemens', 'Sun Pharmaceutical', 'Tata Consumer',
+#        'Tata Motors', 'TCS', 'Tech Mahindra', 'Titan', 'Torrent Pharma',
+#        'UltraTech Cement', 'United Breweries', 'United Spirits', 'UPL',
+#        'Wipro', 'Zydus']
 
 
 
-#fetcing data from yfin
-# start_tim = time.time()
-print("Expected time to download data ==> 1 Minute")
 di= pd.DataFrame()
-
-
 if st.button("Refresh"):
     
     with st.spinner('Wait for few seconds.....'):
+        # start_date = '2023-01-01'
+        # end_date = datetime.now()
+        
+        # for i in lis:
+        #     data = yf.download(i, start=start_date, end=end_date)
+        #     di[sl[lis.index(i)]]=data["Close"]                # yfinn data
+        
+        
+        
+        dt=pd.DataFrame()
+        url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
+        webpag=requests.get(url).text
+        souppp=BeautifulSoup(webpag,'lxml')
+        s=souppp.find_all('tr',class_="")
+        Name=[]
+        Price=[]
+        change_price=[]
+        t=0
+        for i in s[1:98]:
+            N=i.find_all('span',class_="st76SymbolName")
+            P=(i.find_all('div',class_="st76CurrVal bodyBaseHeavy"))[0].text
+            removequma=P.replace(",","")
+            removerupee=removequma.replace("₹","")
+            Price.append(float(removerupee))
+        
+            
+            Name.append(N[0].text)
+            
+        
+            
+            w=i.find_all('div',class_="st76DivSec")
+        
+            target_div = w[0].find('div', {'class': 'bodySmallHeavy contentPositive'})
+            if target_div:
+                change=w[0].find_all('div',class_="bodySmallHeavy contentPositive")
+                change_price.append(change[0].text)
+        
+            
+            else:
+                change=w[0].find_all('div',class_="bodySmallHeavy contentNegative")
+                change_price.append(change[0].text)
+        
+        liss111=[]
+        # liss222=[]
+        for u in change_price:
+            removeq=u.split('(', 1)[0]
+            liss111.append(float(removeq))
+            # removerup=u.split('(', 1)[1]
+            # removeqq=removerup.split(')', 1)[0]
+            # liss222.append(removeqq)
+        dt['Name']=Name
+        dt['Price']=Price
+        dt['Change_price']=liss111
+        
+        trs=dt.T
+        trs.columns = trs.iloc[0]
+        trp = trs[1:2]
+        # trp
+
+        sl=trp.columns
         start_date = '2023-01-01'
         end_date = datetime.now()
         
         for i in lis:
             data = yf.download(i, start=start_date, end=end_date)
-            di[sl[lis.index(i)]]=data["Close"]                # yfinn data
-        
-        
-        
-        
-        for i in range(1):
-            lisss=[]
-            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
-            webpag=requests.get(url).text
-            souppp=BeautifulSoup(webpag,'lxml')
-            s=souppp.find_all('div',class_="st76CurrVal bodyBaseHeavy")
-        
-            for j in range(len(s)):
-                d=s[j].text
-                removequma=d.replace(",","")
-                removerupee=removequma.replace("₹","")
-                lisss.append(float(removerupee))
-        
-        #loading dataframe with Name and url-name
-        gdf=pd.read_csv("nifty_100.csv")
-        
-        
-        # New dataframe by appending real-time price 
-        gdf['Price']=lisss
-        
-        # end_tim = time.time()
-        # print('Duration: {}'.format(end_tim - start_tim))
-        
-        pd.set_option('display.max_rows', None)
-        trs=gdf.T
-        trs.columns = trs.iloc[0]
-        trp = trs[2:]
-        # trp
-        
+            di[sl[lis.index(i)]]=data["Close"] 
         
         # Concatinating both dataframe: yfin + grow
         result = pd.concat([di, trp], ignore_index=True)
@@ -281,17 +303,17 @@ if st.button("Refresh"):
                     oppo.append("sell")
                 else:
                     oppo.append("Wait for opportunity")
-        gdf["Recommended"]=oppo
+        dt["Recommended"]=oppo
         if filtter=="All":
-            st.dataframe(gdf)
+            st.dataframe(dt)
         elif filtter=="Buy":
-            stocks=gdf[gdf["Recommended"]=="buy"]
+            stocks=dt[dt["Recommended"]=="buy"]
             st.dataframe(stocks, use_container_width=True)
         elif filtter=="Sell":
-            stocks=gdf[gdf["Recommended"]=="sell"]
+            stocks=dt[dt["Recommended"]=="sell"]
             st.dataframe(stocks, use_container_width=True)
         else:
-            stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
+            stocks=dt[dt["Recommended"]=="Wait for opportunity"]
             st.dataframe(stocks, use_container_width=True)
 
     st.success('Done!') 
