@@ -34,7 +34,7 @@ with col11:
 col21,col22=st.columns(2)
 
 with col21:
-    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell'])
+    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top-10 Gainers','Top-10 Losers'])
 
 
 lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
@@ -244,20 +244,43 @@ if st.button("Refresh"):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
 
-            
-            
-            comm1,comm2 = st.columns(2)
-            dx=dt.sort_values(by='Change_price')
+        if filtter=="Top-10 Gainers":
+            comm1,comm2,comm3,comm4,comm5= st.columns(5)
             dy=dt.sort_values(by='Change_price',ascending=False)
             for n in range(10):
                 o1=dy.iloc[n,0]
                 o2=dy.iloc[n,1]
                 o3=dy.iloc[n,2]
-                comm1.metric(label=o1, value=f"₹{o2}", delta=o3)
-                o11=dx.iloc[n,0]
-                o21=dx.iloc[n,1]
-                o31=dx.iloc[n,2]
-                comm2.metric(label=o11, value=f"₹{o21}", delta=o31)
+                if n<5:
+                    with eval("comm"+str(n+1)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=5 and n<10:
+                    with eval("c"+str(n-4)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+        if filtter=="Top-10 Losers":
+            comm1,comm2,comm3,comm4,comm5= st.columns(5)
+            dx=dt.sort_values(by='Change_price')
+            for n in range(10):
+                o1=dx.iloc[n,0]
+                o2=dx.iloc[n,1]
+                o3=dx.iloc[n,2]
+                if n<5:
+                    with eval("comm"+str(n+1)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                elif n>=5 and n<10:
+                    with eval("c"+str(n-4)):
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+            
+            # dx=dt.sort_values(by='Change_price')
+            # for n in range(10):
+            #     o1=dy.iloc[n,0]
+            #     o2=dy.iloc[n,1]
+            #     o3=dy.iloc[n,2]
+            #     comm1.metric(label=o1, value=f"₹{o2}", delta=o3)
+            #     o11=dx.iloc[n,0]
+            #     o21=dx.iloc[n,1]
+            #     o31=dx.iloc[n,2]
+            #     comm2.metric(label=o11, value=f"₹{o21}", delta=o31)
         
         elif filtter=="Buy":
             stocks=dt[dt["Recommended"]=="buy"]
