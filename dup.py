@@ -128,7 +128,7 @@ if st.button("Refresh"):
         final_da=result.drop(len(result)-2)
         final_data=final_da.fillna(0)
         # st.dataframe(final_data)
-        st.write(f"DataFrame Length: {len(final_data)}")
+        # st.write(f"DataFrame Length: {len(final_data)}")
         pre_data=final_data[0:len(final_data)-2]
     
     
@@ -303,8 +303,8 @@ if st.button("Refresh"):
                 eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
         
             # st.dataframe(stocks, use_container_width=True)
-        else:
-            stocks=dt[dt["Recommended"]=="Wait for opportunity"]
+        # else:
+        #     stocks=dt[dt["Recommended"]=="Wait for opportunity"]
             # com1, com2, com3,com4,com5,com6 = st.columns(6)
             # for n in range(len(stocks)):
             #     o1=stocks.iloc[n,0]
@@ -331,7 +331,7 @@ if st.button("Refresh"):
             #     else:
             #         st.metric(label=o1, value=f"₹{o2}", delta=o3)
 
-            st.dataframe(stocks, use_container_width=True)
+            # st.dataframe(stocks, use_container_width=True)
 
     # st.success('Done!') 
 
