@@ -204,20 +204,15 @@ if st.button("Refresh"):
             comm1,comm2 = st.columns(2)
             dx=dt.sort_values(by='Change_price')
             dy=dt.sort_values(by='Change_price',ascending=False)
-            for n in range(len(dy)):
-                o1=stocks.iloc[n,0]
-                o2=stocks.iloc[n,1]
-                o3=stocks.iloc[n,2]
-                if n<10:
-                    with comm1:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
-            for r in range(len(dx)):
-                o1=stocks.iloc[r,0]
-                o2=stocks.iloc[r,1]
-                o3=stocks.iloc[r,2]
-                if r<10:
-                    with comm2:
-                        st.metric(label=o1, value=f"₹{o2}", delta=o3)
+            for n in range(10):
+                o1=dy.iloc[n,0]
+                o2=dy.iloc[n,1]
+                o3=dy.iloc[n,2]
+                comm1.metric(label=o1, value=f"₹{o2}", delta=o3)
+                o11=dx.iloc[n,0]
+                o21=dx.iloc[n,1]
+                o31=dx.iloc[n,2]
+                comm2.metric(label=o11, value=f"₹{o21}", delta=o31)
         
         elif filtter=="Buy":
             stocks=dt[dt["Recommended"]=="buy"]
