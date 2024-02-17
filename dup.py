@@ -293,7 +293,6 @@ if st.button("Refresh"):
             st.dataframe(stocks, use_container_width=True)
 
    st.success('Done!') 
-    
 # print(" "*1)
 # print(" 1 👈 For Buying stocks ")
 # print(" 2 👈 For Selling stocks ")
