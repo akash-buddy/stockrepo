@@ -16,7 +16,7 @@ st.set_page_config(
     layout='wide'
 )
 
-st.metric(label="Temperature", value="70 °F", delta="1.2 °F")
+st.metric(label="Temperature", value="70 °F", delta="-1.2 °F")
 
 
 coll1,coll2,coll3=st.columns([2,3,1])
