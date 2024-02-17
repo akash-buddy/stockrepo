@@ -206,7 +206,7 @@ if st.button("Refresh"):
                 o1=dt.iloc[n,0]
                 o2=dt.iloc[n,1]
                 o3=dt.iloc[n,2]
-                if n<10:
+                if n<7:
                     with eval("c"+str(n+1)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
