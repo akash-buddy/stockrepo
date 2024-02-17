@@ -93,7 +93,7 @@ di= pd.DataFrame()
 
 if st.button("Refresh"):
     
-    with st.spinner('Wait for it...'):
+    with st.spinner('Wait for few seconds.....'):
         start_date = '2023-01-01'
         end_date = datetime.now()
         
