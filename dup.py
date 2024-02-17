@@ -214,7 +214,7 @@ if st.button("Refresh"):
             st.dataframe(stocks, use_container_width=True)
 
     # st.success('Done!') 
-
+st.metric(label="Temperature", value="70 °F", delta="-1.2 °F")
     
     
 
