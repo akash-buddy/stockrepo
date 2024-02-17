@@ -246,9 +246,6 @@ if st.button("Refresh"):
                     with eval("c"+str(n-95)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
 
-            if st.checkbox("Toggle Button"):
-                st.dataframe(dt)
-
         
         if filtter=="Top-10 Gainers":
             comm1,comm2,comm3,comm4,comm5= st.columns(5)
