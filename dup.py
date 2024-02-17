@@ -258,7 +258,7 @@ if st.button("Refresh"):
                     with eval("comm"+str(n+1)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                 elif n>=5 and n<10:
-                    with eval("c"+str(n-4)):
+                    with eval("comm"+str(n-4)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
         if filtter=="Top-10 Losers":
             comm1,comm2,comm3,comm4,comm5= st.columns(5)
@@ -271,7 +271,7 @@ if st.button("Refresh"):
                     with eval("comm"+str(n+1)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                 elif n>=5 and n<10:
-                    with eval("c"+str(n-4)):
+                    with eval("comm"+str(n-4)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
             
 
