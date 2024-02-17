@@ -17,10 +17,6 @@ st.set_page_config(
 )
 
 
-
-# Use st.markdown to include HTML tags for bold within st.metric
-st.metric(label_text, f"<b>{metric_value}</b>")
-
 coll1,coll2,coll3=st.columns([2,3,1])
 with coll1:
     st.title("Test Your Moving Average")
