@@ -206,18 +206,14 @@ if st.button("Refresh"):
         elif filtter=="Buy":
             stocks=dt[dt["Recommended"]=="buy"]
             com1, com2, com3,com4,com5 = st.columns(5)
-            ft=[com1, com2]
             for n in range(len(stocks)):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
                 eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
         
-                # if n==0:
-                #     com1.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
-                # if n==1:
-                #     com2.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
             # st.dataframe(stocks, use_container_width=True)
+        
         elif filtter=="Sell":
             stocks=dt[dt["Recommended"]=="sell"]
             com1, com2, com3,com4,com5 = st.columns(5)
@@ -225,7 +221,7 @@ if st.button("Refresh"):
                 o1=stocks.iloc[n,0]
                 o2=stocks.iloc[n,1]
                 o3=stocks.iloc[n,2]
-                eval("com"+str(n+1)).metric(label=st.subheader(o1), value=f"₹{o2}", delta=f"{o3}₹") 
+                eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
         
             # st.dataframe(stocks, use_container_width=True)
         else:
@@ -238,10 +234,10 @@ if st.button("Refresh"):
 
 
 
-            # st.dataframe(stocks, use_container_width=True)
+            st.dataframe(stocks, use_container_width=True)
 
     # st.success('Done!') 
-st.metric(label="Temperature", value="70 °F", delta="-1.2 °F")
+
     
     
 
