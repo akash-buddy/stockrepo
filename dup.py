@@ -92,203 +92,208 @@ di= pd.DataFrame()
 
 
 if st.button("Refresh"):
-    start_date = '2023-01-01'
-    end_date = datetime.now()
     
-    for i in lis:
-        data = yf.download(i, start=start_date, end=end_date)
-        di[sl[lis.index(i)]]=data["Close"]                # yfinn data
+    with st.spinner('Wait for it...'):
+        
+        start_date = '2023-01-01'
+        end_date = datetime.now()
+        
+        for i in lis:
+            data = yf.download(i, start=start_date, end=end_date)
+            di[sl[lis.index(i)]]=data["Close"]                # yfinn data
+        
+        
+        
+        
+        for i in range(1):
+            lisss=[]
+            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
+            webpag=requests.get(url).text
+            souppp=BeautifulSoup(webpag,'lxml')
+            s=souppp.find_all('div',class_="st76CurrVal bodyBaseHeavy")
+        
+            for j in range(len(s)):
+                d=s[j].text
+                removequma=d.replace(",","")
+                removerupee=removequma.replace("₹","")
+                lisss.append(float(removerupee))
+        
+        #loading dataframe with Name and url-name
+        gdf=pd.read_csv("nifty_100.csv")
+        
+        
+        # New dataframe by appending real-time price 
+        gdf['Price']=lisss
+        
+        # end_tim = time.time()
+        # print('Duration: {}'.format(end_tim - start_tim))
+        
+        pd.set_option('display.max_rows', None)
+        trs=gdf.T
+        trs.columns = trs.iloc[0]
+        trp = trs[2:]
+        # trp
+        
+        
+        # Concatinating both dataframe: yfin + grow
+        result = pd.concat([di, trp], ignore_index=True)
+        final_da=result.drop(len(result)-2)
+        final_data=final_da.fillna(0)
+        # st.dataframe(final_data)
+        st.write(f"DataFrame Length: {len(final_data)}")
+        pre_data=final_data[0:len(final_data)-2]
     
     
     
     
-    for i in range(1):
-        lisss=[]
-        url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
-        webpag=requests.get(url).text
-        souppp=BeautifulSoup(webpag,'lxml')
-        s=souppp.find_all('div',class_="st76CurrVal bodyBaseHeavy")
     
-        for j in range(len(s)):
-            d=s[j].text
-            removequma=d.replace(",","")
-            removerupee=removequma.replace("₹","")
-            lisss.append(float(removerupee))
-    
-    #loading dataframe with Name and url-name
-    gdf=pd.read_csv("nifty_100.csv")
-    
-    
-    # New dataframe by appending real-time price 
-    gdf['Price']=lisss
-    
-    # end_tim = time.time()
-    # print('Duration: {}'.format(end_tim - start_tim))
-    
-    pd.set_option('display.max_rows', None)
-    trs=gdf.T
-    trs.columns = trs.iloc[0]
-    trp = trs[2:]
-    # trp
-    
-    
-    # Concatinating both dataframe: yfin + grow
-    result = pd.concat([di, trp], ignore_index=True)
-    final_da=result.drop(len(result)-2)
-    final_data=final_da.fillna(0)
-    # st.dataframe(final_data)
-    st.write(f"DataFrame Length: {len(final_data)}")
-    pre_data=final_data[0:len(final_data)-2]
-
-
-
-
-
-
-    
-
-    # oppo=[]
-    # for k in sl:
-    #     ma1 =final_data[k].rolling(moving_window1).mean()
-    #     f1=round(ma1[len(ma1)],2)
-    #     # st.write(f1)
-    #     ma2 =final_data[k].rolling(moving_window2).mean()
-    #     f2=round(ma2[len(ma1)],2)
-    #     # st.write(f2)
-    #     if (final_data.at[len(final_data),k]>=0) and (final_data.at[len(final_data),k]<=100):
-    #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
-    #             oppo.append("buy")
-    #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
-    #             oppo.append("sell")
-    #         else:
-    #             oppo.append("Wait for opportunity")
-    #     elif (final_data.at[len(final_data),k]>=101) and (final_data.at[len(final_data),k]<=200):
-    #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
-    #             oppo.append("buy")
-    #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
-    #             oppo.append("sell")
-    #         else:
-    #             oppo.append("Wait for opportunity")
-    
-    #     elif (final_data.at[len(final_data),k]>=201) and (final_data.at[len(final_data),k]<=500):
-    #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
-    #             oppo.append("buy")
-    #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
-    #             oppo.append("sell")
-    #         else:
-    #             oppo.append("Wait for opportunity")
-    
-    #     elif (final_data.at[len(final_data),k]>=501) and (final_data.at[len(final_data),k]<=1000):
-    #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (4) ) :
-    #             oppo.append("buy")
-    #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-4) ) :
-    #             oppo.append("sell")
-    #         else:
-    #             oppo.append("Wait for opportunity")
-    
-    #     elif (final_data.at[len(final_data),k]>=1001) and (final_data.at[len(final_data),k]<=2000):
-    #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (5) ) :
-    #             oppo.append("buy")
-    #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-5) ) :
-    #             oppo.append("sell")
-    #         else:
-    #             oppo.append("Wait for opportunity")
-    
-    #     elif (final_data.at[len(final_data),k]>=2001) and (final_data.at[len(final_data),k]<=5000):
-    #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (10) ) :
-    #             oppo.append("buy")
-    #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-10) ) :
-    #             oppo.append("sell")
-    #         else:
-    #             oppo.append("Wait for opportunity")
-    
-    #     else :
-    #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (15) ) : 
-    #             oppo.append("buy")
-    #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-15) ) :
-    #             oppo.append("sell")
-    #         else:
-    #             oppo.append("Wait for opportunity")
-
-    oppo=[]
-    for i in sl:
-        # for pre_data calculating moving average
-        pre_ma1=pre_data[i].rolling(moving_window1).mean()
-        pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
-        pre_ma2 =pre_data[i].rolling(moving_window2).mean()
-        pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
     
         
-        ma1 =final_data[i].rolling(moving_window1).mean()
-        f1=round(ma1[len(ma1)],2)
-        ma2 =final_data[i].rolling(moving_window2).mean()
-        f2=round(ma2[len(ma2)],2)
-        if (final_data.at[len(final_data),i]>=0) and (final_data.at[len(final_data),i]<=100):
-            if (pre_f1 > pre_f2) and (f1 < f2)  :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2) :
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
-        elif (final_data.at[len(final_data),i]>=101) and (final_data.at[len(final_data),i]<=200):
-            if (pre_f1 > pre_f2) and (f1 < f2)  :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2) :
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
-        elif (final_data.at[len(final_data),i]>=201) and (final_data.at[len(final_data),i]<=500):
-            if (pre_f1 > pre_f2) and (f1 < f2) :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2) :
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
     
-        elif (final_data.at[len(final_data),i]>=501) and (final_data.at[len(final_data),i]<=1000):
-            if (pre_f1 > pre_f2) and (f1 < f2) :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2) :
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
-    
-        elif (final_data.at[len(final_data),i]>=1001) and (final_data.at[len(final_data),i]<=2000):
-            if (pre_f1 > pre_f2) and (f1 < f2) :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2):
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
-    
-        elif (final_data.at[len(final_data),i]>=2001) and (final_data.at[len(final_data),i]<=5000):
-            if (pre_f1 > pre_f2) and (f1 < f2)  :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2)  :
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
-    
-        else :
-            if (pre_f1 > pre_f2) and (f1 < f2) :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2) :
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
-    gdf["Recommended"]=oppo
-    if filtter=="All":
-        st.dataframe(gdf)
-    elif filtter=="Buy":
-        stocks=gdf[gdf["Recommended"]=="buy"]
-        st.dataframe(stocks, use_container_width=True)
-    elif filtter=="Sell":
-        stocks=gdf[gdf["Recommended"]=="sell"]
-        st.dataframe(stocks, use_container_width=True)
-    else:
-        stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
-        st.dataframe(stocks, use_container_width=True)
+        # oppo=[]
+        # for k in sl:
+        #     ma1 =final_data[k].rolling(moving_window1).mean()
+        #     f1=round(ma1[len(ma1)],2)
+        #     # st.write(f1)
+        #     ma2 =final_data[k].rolling(moving_window2).mean()
+        #     f2=round(ma2[len(ma1)],2)
+        #     # st.write(f2)
+        #     if (final_data.at[len(final_data),k]>=0) and (final_data.at[len(final_data),k]<=100):
+        #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
+        #             oppo.append("buy")
+        #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
+        #             oppo.append("sell")
+        #         else:
+        #             oppo.append("Wait for opportunity")
+        #     elif (final_data.at[len(final_data),k]>=101) and (final_data.at[len(final_data),k]<=200):
+        #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
+        #             oppo.append("buy")
+        #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
+        #             oppo.append("sell")
+        #         else:
+        #             oppo.append("Wait for opportunity")
         
+        #     elif (final_data.at[len(final_data),k]>=201) and (final_data.at[len(final_data),k]<=500):
+        #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (3) ) :
+        #             oppo.append("buy")
+        #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-3) ) :
+        #             oppo.append("sell")
+        #         else:
+        #             oppo.append("Wait for opportunity")
+        
+        #     elif (final_data.at[len(final_data),k]>=501) and (final_data.at[len(final_data),k]<=1000):
+        #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (4) ) :
+        #             oppo.append("buy")
+        #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-4) ) :
+        #             oppo.append("sell")
+        #         else:
+        #             oppo.append("Wait for opportunity")
+        
+        #     elif (final_data.at[len(final_data),k]>=1001) and (final_data.at[len(final_data),k]<=2000):
+        #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (5) ) :
+        #             oppo.append("buy")
+        #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-5) ) :
+        #             oppo.append("sell")
+        #         else:
+        #             oppo.append("Wait for opportunity")
+        
+        #     elif (final_data.at[len(final_data),k]>=2001) and (final_data.at[len(final_data),k]<=5000):
+        #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (10) ) :
+        #             oppo.append("buy")
+        #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-10) ) :
+        #             oppo.append("sell")
+        #         else:
+        #             oppo.append("Wait for opportunity")
+        
+        #     else :
+        #         if (f1 >= f2) and ((f1-f2) >= (0) and (f1-f2) <= (15) ) : 
+        #             oppo.append("buy")
+        #         elif (f1 <= f2) and ((f1-f2) >= (0) and (f1-f2) <= (-15) ) :
+        #             oppo.append("sell")
+        #         else:
+        #             oppo.append("Wait for opportunity")
+    
+        oppo=[]
+        for i in sl:
+            # for pre_data calculating moving average
+            pre_ma1=pre_data[i].rolling(moving_window1).mean()
+            pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
+            pre_ma2 =pre_data[i].rolling(moving_window2).mean()
+            pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
+        
+            
+            ma1 =final_data[i].rolling(moving_window1).mean()
+            f1=round(ma1[len(ma1)],2)
+            ma2 =final_data[i].rolling(moving_window2).mean()
+            f2=round(ma2[len(ma2)],2)
+            if (final_data.at[len(final_data),i]>=0) and (final_data.at[len(final_data),i]<=100):
+                if (pre_f1 > pre_f2) and (f1 < f2)  :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+            elif (final_data.at[len(final_data),i]>=101) and (final_data.at[len(final_data),i]<=200):
+                if (pre_f1 > pre_f2) and (f1 < f2)  :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+            elif (final_data.at[len(final_data),i]>=201) and (final_data.at[len(final_data),i]<=500):
+                if (pre_f1 > pre_f2) and (f1 < f2) :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+        
+            elif (final_data.at[len(final_data),i]>=501) and (final_data.at[len(final_data),i]<=1000):
+                if (pre_f1 > pre_f2) and (f1 < f2) :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+        
+            elif (final_data.at[len(final_data),i]>=1001) and (final_data.at[len(final_data),i]<=2000):
+                if (pre_f1 > pre_f2) and (f1 < f2) :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2):
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+        
+            elif (final_data.at[len(final_data),i]>=2001) and (final_data.at[len(final_data),i]<=5000):
+                if (pre_f1 > pre_f2) and (f1 < f2)  :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2)  :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+        
+            else :
+                if (pre_f1 > pre_f2) and (f1 < f2) :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+        gdf["Recommended"]=oppo
+        if filtter=="All":
+            st.dataframe(gdf)
+        elif filtter=="Buy":
+            stocks=gdf[gdf["Recommended"]=="buy"]
+            st.dataframe(stocks, use_container_width=True)
+        elif filtter=="Sell":
+            stocks=gdf[gdf["Recommended"]=="sell"]
+            st.dataframe(stocks, use_container_width=True)
+        else:
+            stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
+            st.dataframe(stocks, use_container_width=True)
+
+   st.success('Done!') 
+    
 # print(" "*1)
 # print(" 1 👈 For Buying stocks ")
 # print(" 2 👈 For Selling stocks ")
