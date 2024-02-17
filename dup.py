@@ -94,7 +94,6 @@ di= pd.DataFrame()
 if st.button("Refresh"):
     
     with st.spinner('Wait for it...'):
-        
         start_date = '2023-01-01'
         end_date = datetime.now()
         
@@ -292,7 +291,7 @@ if st.button("Refresh"):
             stocks=gdf[gdf["Recommended"]=="Wait for opportunity"]
             st.dataframe(stocks, use_container_width=True)
 
-   st.success('Done!') 
+    st.success('Done!') 
 # print(" "*1)
 # print(" 1 👈 For Buying stocks ")
 # print(" 2 👈 For Selling stocks ")
