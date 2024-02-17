@@ -200,7 +200,7 @@ if st.button("Refresh"):
                     oppo.append("Wait for opportunity")
         dt["Recommended"]=oppo
         if filtter=="All":
-            st.dataframe(dt)
+            # st.dataframe(dt)
             c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
             for n in range(len(dt)):
                 o1=dt.iloc[n,0]
@@ -208,7 +208,7 @@ if st.button("Refresh"):
                 o3=dt.iloc[n,2]
                 if n<8:
                     with eval("c"+str(n+1)):
-                        st.metric(label=f"₹{o2}", value=o1, delta=f"{o3}₹")
+                        st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                 elif n>=8 and n<16:
                     with eval("c"+str(n-7)):
                         st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
