@@ -15,10 +15,11 @@ st.set_page_config(
     page_title='Akash-Trader',
     layout='wide'
 )
+
+tab1, tab2, tab3 = st.tabs(["Nifty 100", "Agriculture", "Automobile"])
+
 with tab1:
-    
-    tab1, tab2, tab3 = st.tabs(["Nifty 100", "Agriculture", "Automobile"])
-    
+
     coll1,coll2,coll3=st.columns([3,2,1])
     with coll1:
         st.title("Try Your Moving Average")
