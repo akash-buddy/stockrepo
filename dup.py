@@ -83,33 +83,9 @@ if st.button("Refresh"):
         
             
             Name.append(N[0].text)
-            
-        
-            
-            w=i.find_all('div',class_="st76DivSec")
-        
-            target_div = w[0].find('div', {'class': 'bodySmallHeavy contentPositive'})
-            if target_div:
-                change=w[0].find_all('div',class_="bodySmallHeavy contentPositive")
-                change_price.append(change[0].text)
-        
-            
-            else:
-                change=w[0].find_all('div',class_="bodySmallHeavy contentNegative")
-                change_price.append(change[0].text)
-        
-        liss111=[]
-        # liss222=[]
-        for u in change_price:
-            removeq=u.split('(', 1)[0]
-            liss111.append(float(removeq))
-            # removerup=u.split('(', 1)[1]
-            # removeqq=removerup.split(')', 1)[0]
-            # liss222.append(removeqq)
+
         dt['Name']=Name
-        dt['Price']=Price
-        dt['Change_price']=liss111
-        
+        dt['Price']=Price        
         trs=dt.T
         trs.columns = trs.iloc[0]
         trp = trs[1:2]
@@ -130,8 +106,15 @@ if st.button("Refresh"):
         # st.dataframe(final_data)
         # st.write(f"DataFrame Length: {len(final_data)}")
         pre_data=final_data[0:len(final_data)-2]
-    
-    
+
+        current_price=final_data[(len(final_data)-1):len(final_data)]
+        previous_price=final_data[(len(final_data)-2):len(final_data)-1]
+        change_price=[]
+        for i in range(97):
+            change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
+            change_price.append(change_p)
+        dt['Change_price']=change_price
+        
         oppo=[]
         for i in sl:
             # for pre_data calculating moving average
