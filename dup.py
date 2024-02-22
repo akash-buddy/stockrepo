@@ -112,7 +112,7 @@ if st.button("Refresh"):
         change_price=[]
         for i in range(97):
             change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
-            change_price.append(change_p)
+            change_price.append(round(change_p,2))
         dt['Change_price']=change_price
         
         oppo=[]
