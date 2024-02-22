@@ -290,6 +290,7 @@ with tab1:
 # .............................................................................................................................................................
 with tab2:
     
+    
     coll1,coll2,coll3=st.columns([3,2,1])
     with coll1:
         st.title("Try Your Moving Average")
@@ -555,7 +556,6 @@ with tab2:
             # else:
             #     stocks=dt[dt["Recommended"]=="Wait for opportunity"]
                 # st.dataframe(stocks, use_container_width=True) 
-
 
 
 
