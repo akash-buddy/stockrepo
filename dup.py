@@ -287,27 +287,30 @@ with tab1:
                 # st.dataframe(stocks, use_container_width=True) 
 
     
-# .............................................................................................................................................................
+# ............................................................................................................................................................
+# ............................................................................................................................................................
+# ...............................................................................................................................................................
+
 with tab2:
     
     
-    coll1,coll2,coll3=st.columns([3,2,1])
-    with coll1:
+    coll1_ag,coll2_ag,coll3_ag=st.columns([3,2,1])
+    with coll1_ag:
         st.title("Try Your Moving Average")
     
-    col1,col2=st.columns(2)
+    col1_ag,col2_ag=st.columns(2)
     
-    with col1:
+    with col1_ag:
         moving1= st.number_input("Enter Big moving Average")
         moving_window1=int(moving1)
     
-    col11,col12=st.columns(2)
-    with col11:
+    col11_ag,col12_ag=st.columns(2)
+    with col11_ag:
         moving2=st.number_input("Enter Small moving Average")
         moving_window2=int(moving2)
-    col21,col22=st.columns(2)
+    col21_ag,col22_ag=st.columns(2)
     
-    with col21:
+    with col21_ag:
         filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top-10 Gainers','Top-10 Losers'])
     
     
