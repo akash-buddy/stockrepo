@@ -317,36 +317,13 @@ if option=="Nifty 100":
 
 if option=="Agriculture":
     
-    lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
-           'ADANIPORTS.NS', 'ALKEM.NS', 'AMBUJACEM.NS', 'ASIANPAINT.NS',
-           'AUROPHARMA.NS', 'DMART.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS',
-           'BAJFINANCE.NS', 'BAJAJHLDNG.NS', 'BANDHANBNK.NS', 'BANKBARODA.NS',
-           'BERGEPAINT.NS', 'BHARTIARTL.NS', 'BIOCON.NS', 'BOSCHLTD.NS', 'BPCL.NS',
-           'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'COLPAL.NS', 'CONCOR.NS',
-           'DABUR.NS', 'DIVISLAB.NS', 'DLF.NS', 'DRREDDY.NS', 'EICHERMOT.NS',
-           'GAIL.NS', 'GICRE.NS', 'GODREJCP.NS', 'GRASIM.NS', 'HAVELLS.NS',
-           'HCLTECH.NS', 'HDFCAMC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS',
-           'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'HINDZINC.NS',
-           'HINDPETRO.NS', 'ICICIBANK.NS', 'ICICIGI.NS', 'ICICIPRULI.NS', 'IGL.NS',
-           'INDUSTOWER.NS', 'INDUSINDBK.NS', 'NAUKRI.NS', 'INFY.NS', 'INDIGO.NS',
-           'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'LTIM.NS',
-           'LUPIN.NS', 'M&M.NS', 'MARICO.NS', 'MARUTI.NS', 'MUTHOOTFIN.NS',
-           'NESTLEIND.NS', 'NMDC.NS', 'NTPC.NS', 'OFSS.NS', 'ONGC.NS', 'PGHH.NS',
-           'PETRONET.NS', 'PIDILITIND.NS', 'PEL.NS', 'PNB.NS', 'PFC.NS',
-           'POWERGRID.NS', 'RELIANCE.NS','MOTHERSON.NS', 'SBIN.NS', 'SBICARD.NS',
-           'SBILIFE.NS', 'SHREECEM.NS', 'SIEMENS.NS', 'SUNPHARMA.NS',
-           'TATACONSUM.NS', 'TATAMOTORS.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS',
-           'TORNTPHARM.NS', 'ULTRACEMCO.NS', 'UBL.NS', 'MCDOWELL-N.NS', 'UPL.NS',
-           'WIPRO.NS', 'ZYDUSLIFE.NS']
-    
-    
     di= pd.DataFrame()
     if st.button("Refresh"):
         
         with st.spinner('Wait for few seconds.....'):
             
-            dt=pd.DataFrame()
-            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
+            df=pd.DataFrame()
+            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&industryIds=2,9,47,55,114&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
             webpag=requests.get(url).text
             souppp=BeautifulSoup(webpag,'lxml')
             s=souppp.find_all('tr',class_="")
@@ -354,7 +331,7 @@ if option=="Agriculture":
             Price=[]
             change_price=[]
             t=0
-            for i in s[1:98]:
+            for i in s[2:]:
                 N=i.find_all('span',class_="st76SymbolName")
                 P=(i.find_all('div',class_="st76CurrVal bodyBaseHeavy"))[0].text
                 removequma=P.replace(",","")
@@ -363,18 +340,26 @@ if option=="Agriculture":
             
                 
                 Name.append(N[0].text)
-    
-            dt['Name']=Name
-            dt['Price']=Price        
+            
+            df['Name']=Name
+            df['Price']=Price
+            dt= df[df['Name'].isin(only_nse['Name'])]
+            dt=dt.drop_duplicates()
             trs=dt.T
+            
             trs.columns = trs.iloc[0]
             trp = trs[1:2]
             # trp
-    
+            li=dt['Name'].tolist()
+            dp=pd.read_csv("Only_nse_agriculture.csv")
+            dp=dp.drop_duplicates()
+            lis=dp['Symbol'].tolist()
+            
+            
             sl=trp.columns
+            
             start_date = '2023-01-01'
             end_date = datetime.now()
-            
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
                 di[sl[lis.index(i)]]=data["Close"] 
@@ -386,11 +371,11 @@ if option=="Agriculture":
             # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-2]
-    
+            
             current_price=final_data[(len(final_data)-1):len(final_data)]
             previous_price=final_data[(len(final_data)-2):len(final_data)-1]
             change_price=[]
-            for i in range(97):
+            for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
                 change_price.append(round(change_p,2))
             dt['Change_price']=change_price
