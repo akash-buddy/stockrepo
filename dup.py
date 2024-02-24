@@ -102,9 +102,10 @@ if option=="Nifty 100":
             dp=pd.read_csv("nifty_100.csv")
             lis=[]
             for i in Name:
-                e=dp[dp['Name']==i]
-                lis.append(e.iloc[0,2])
-            st.write(lis[1])
+                ee=dp[dp['Name']==i]
+                e=ee.iloc[0,2]
+                lis.append(e[1])
+            st.write(lis)
             sl=trp.columns
             start_date = '2023-01-01'
             end_date = datetime.now()
