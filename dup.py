@@ -44,7 +44,7 @@ with col21:
 
 
 if option=="Nifty 100":
-    dp=pd.read_csv("nifty_100.csv")
+    
     
     # lis=['ABBOTINDIA.NS', 'ACC.NS', 'ADANIENSOL.NS', 'ADANIGREEN.NS',
     #        'ADANIPORTS.NS', 'ALKEM.NS', 'AMBUJACEM.NS', 'ASIANPAINT.NS',
@@ -83,7 +83,7 @@ if option=="Nifty 100":
             Price=[]
             change_price=[]
             t=0
-            for i in s[1:98]:
+            for i in s[1:]:
                 N=i.find_all('span',class_="st76SymbolName")
                 P=(i.find_all('div',class_="st76CurrVal bodyBaseHeavy"))[0].text
                 removequma=P.replace(",","")
@@ -99,6 +99,7 @@ if option=="Nifty 100":
             trs.columns = trs.iloc[0]
             trp = trs[1:2]
             # trp
+            dp=pd.read_csv("nifty_100.csv")
             lis=[]
             for i in Name:
                 e=dp[dp['Name']==i]
