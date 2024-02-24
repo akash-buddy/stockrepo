@@ -99,17 +99,17 @@ if option=="Nifty 100":
             trs.columns = trs.iloc[0]
             trp = trs[1:2]
             # trp
+            
             dp=pd.read_csv("nifty_100.csv")
-            st.write(dp)
             lis=[]
             for i in Name:
                 ee=dp[dp['Name']==i]
-                lis.append(ee.iloc[0,2])
+                lis.append(ee.iloc[0,3])
             
             sl=trp.columns
+            
             start_date = '2023-01-01'
             end_date = datetime.now()
-            
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
                 di[sl[lis.index(i)]]=data["Close"] 
