@@ -103,7 +103,7 @@ if option=="Nifty 100":
             lis=[]
             for i in Name:
                 ee=dp[dp['Name']==i]
-                lis.append(e.iloc[0,2])
+                lis.append(ee.iloc[0,2])
             st.write(lis)
             sl=trp.columns
             start_date = '2023-01-01'
