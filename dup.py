@@ -533,7 +533,13 @@ if option=="Agriculture":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                    if n<5:
+                        with eval("com"+str(n+1)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                    elif n>=5 and n<10:
+                        with eval("com"+str(n-4)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                    # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
             
                 # st.dataframe(stocks, use_container_width=True)
             
