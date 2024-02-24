@@ -343,7 +343,10 @@ if option=="Agriculture":
             
             df['Name']=Name
             df['Price']=Price
-            dt= df[df['Name'].isin(only_nse['Name'])]
+            dpp=pd.read_csv("Only_nse_agriculture.csv")
+            dp=dpp.drop_duplicates()
+            lis=dp['Symbol'].tolist()
+            dt= df[df['Name'].isin(dp['Name'])]
             dt=dt.drop_duplicates()
             trs=dt.T
             
@@ -351,9 +354,7 @@ if option=="Agriculture":
             trp = trs[1:2]
             # trp
             li=dt['Name'].tolist()
-            dp=pd.read_csv("Only_nse_agriculture.csv")
-            dp=dp.drop_duplicates()
-            lis=dp['Symbol'].tolist()
+
             
             
             sl=trp.columns
