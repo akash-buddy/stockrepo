@@ -67,7 +67,7 @@ if option=="Nifty 100":
            'TATACONSUM.NS', 'TATAMOTORS.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS',
            'TORNTPHARM.NS', 'ULTRACEMCO.NS', 'UBL.NS', 'MCDOWELL-N.NS', 'UPL.NS',
            'WIPRO.NS', 'ZYDUSLIFE.NS']
-    
+    st.write(lis)
     
     di= pd.DataFrame()
     if st.button("Refresh"):
