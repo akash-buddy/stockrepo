@@ -815,7 +815,7 @@ if option=="Banking":
         with st.spinner('Wait for few seconds.....'):
             
             df=pd.DataFrame()
-            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&industryIds=10,11,12,13,14,18,107,151,152&marketCapHigh=2000000&marketCapLow=0&page=0&size=150&sortBy=COMPANY_NAME&sortType=ASC'
+            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&industryIds=15,16&marketCapHigh=2000000&marketCapLow=0&page=0&size=50&sortBy=COMPANY_NAME&sortType=ASC'
             webpag=requests.get(url).text
             souppp=BeautifulSoup(webpag,'lxml')
             s=souppp.find_all('tr',class_="")
