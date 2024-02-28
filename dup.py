@@ -823,7 +823,7 @@ if option=="Banking":
             Price=[]
             change_price=[]
             t=0
-            for i in s[2:]:
+            for i in s[1:]:
                 N=i.find_all('span',class_="st76SymbolName")
                 P=(i.find_all('div',class_="st76CurrVal bodyBaseHeavy"))[0].text
                 removequma=P.replace(",","")
