@@ -71,6 +71,7 @@ if option=="Nifty 100":
                 Name.append(N[0].text)
     
             dt['Name']=Name
+            dt['Price']=Price
             df=pd.read_csv("2_March_saturday.csv")
             column_nam=list(df.columns)
             column_nam.pop(0)
@@ -81,8 +82,7 @@ if option=="Nifty 100":
                     pp=df[df['Name']==i]
                     lio.append(pp.iloc[0,vr+1])
                 dt[f'{col_name}']=lio
-            
-            dt['Price']=Price
+                
             trs=dt.T
             trs.columns = trs.iloc[0]
             trp = trs[1:len(trs)]
