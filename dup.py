@@ -108,7 +108,7 @@ if option=="Nifty 100":
             final_data=final_da.fillna(0)
             # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
-            pre_data=final_data[0:len(final_data)-2]
+            pre_data=final_data[0:len(final_data)-len(trp)]
     
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
@@ -338,15 +338,16 @@ if option=="Agriculture":
             lis=dp['Symbol'].tolist()
             dt= df[df['Name'].isin(dp['Name'])]
             dt=dt.drop_duplicates()
-
-            df=pd.read_csv("2_March_saturday.csv")
-            column_nam=list(df.columns)
+            Name_l=dt['Name'].tolist()
+            
+            df_s=pd.read_csv("2_March_saturday.csv")
+            column_nam=list(df_s.columns)
             column_nam.pop(0)
             for col_name in column_nam:
                 vr=column_nam.index(col_name)
                 lio=[]
-                for i in Name:
-                    pp=df[df['Name']==i]
+                for i in Name_l:
+                    pp=df_s[df_s['Name']==i]
                     lio.append(pp.iloc[0,vr+1])
                 dt[f'{col_name}']=lio
                 
