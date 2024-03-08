@@ -313,7 +313,7 @@ if option=="Agriculture":
         with st.spinner('Wait for few seconds.....'):
             
             df=pd.DataFrame()
-            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&industryIds=2,9,47,55,114&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
+            url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&industryIds=2,9,47,55,114&marketCapHigh=2000000&marketCapLow=0&page=0&size=110&sortBy=COMPANY_NAME&sortType=ASC'
             webpag=requests.get(url).text
             souppp=BeautifulSoup(webpag,'lxml')
             s=souppp.find_all('tr',class_="")
@@ -374,7 +374,7 @@ if option=="Agriculture":
             final_data=final_da.fillna(0)
             # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
-            pre_data=final_data[0:len(final_data)-2]
+            pre_data=final_data[0:len(final_data)-len(trp)]
             
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
