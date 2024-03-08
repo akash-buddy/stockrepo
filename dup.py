@@ -106,7 +106,7 @@ if option=="Nifty 100":
             result = pd.concat([di, trp], ignore_index=True)
             final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
-            st.dataframe(final_data)
+            # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-2]
     
@@ -338,10 +338,22 @@ if option=="Agriculture":
             lis=dp['Symbol'].tolist()
             dt= df[df['Name'].isin(dp['Name'])]
             dt=dt.drop_duplicates()
+
+            df=pd.read_csv("2_March_saturday.csv")
+            column_nam=list(df.columns)
+            column_nam.pop(0)
+            for col_name in column_nam:
+                vr=column_nam.index(col_name)
+                lio=[]
+                for i in Name:
+                    pp=df[df['Name']==i]
+                    lio.append(pp.iloc[0,vr+1])
+                dt[f'{col_name}']=lio
+                
             trs=dt.T
             
             trs.columns = trs.iloc[0]
-            trp = trs[1:2]
+            trp = trs[1:len(trs)]
             # trp
             li=dt['Name'].tolist()
 
@@ -357,19 +369,20 @@ if option=="Agriculture":
             
             # Concatinating both dataframe: yfin + grow
             result = pd.concat([di, trp], ignore_index=True)
-            final_da=result.drop(len(result)-2)
+            final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
             # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-2]
             
-            current_price=final_data[(len(final_data)-1):len(final_data)]
-            previous_price=final_data[(len(final_data)-2):len(final_data)-1]
+            current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
+            previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
             change_price=[]
             for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
                 change_price.append(round(change_p,2))
-            dt['Change_price']=change_price
+            # dt['Change_price']=change_price
+            dt.insert(2, 'Change_price', change_price)
             
             oppo=[]
             for i in sl:
