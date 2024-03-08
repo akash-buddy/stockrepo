@@ -372,9 +372,10 @@ if option=="Agriculture":
             result = pd.concat([di, trp], ignore_index=True)
             final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
-            # st.dataframe(final_data)
+            st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-len(trp)]
+            st.dataframe(pre_data)
             
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
@@ -398,6 +399,7 @@ if option=="Agriculture":
                 f1=round(ma1[len(ma1)],2)
                 ma2 =final_data[i].rolling(moving_window2).mean()
                 f2=round(ma2[len(ma2)],2)
+                st.write(f2)
                 if (final_data.at[len(final_data),i]>=0) and (final_data.at[len(final_data),i]<=100):
                     if (pre_f1 > pre_f2) and (f1 < f2)  :
                         oppo.append("buy")
