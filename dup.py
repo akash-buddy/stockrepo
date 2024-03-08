@@ -110,8 +110,8 @@ if option=="Nifty 100":
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-2]
     
-            current_price=final_data[(len(final_data)-1):len(final_data)]
-            previous_price=final_data[(len(final_data)-2):len(final_data)-1]
+            current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
+            previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
             change_price=[]
             for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
