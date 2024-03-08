@@ -186,7 +186,7 @@ if option=="Nifty 100":
                     else:
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
-            st.write(dt)
+            # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
@@ -372,10 +372,10 @@ if option=="Agriculture":
             result = pd.concat([di, trp], ignore_index=True)
             final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
-            st.dataframe(final_data)
+            # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-len(trp)]
-            st.dataframe(pre_data)
+            # st.dataframe(pre_data)
             
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
@@ -399,7 +399,6 @@ if option=="Agriculture":
                 f1=round(ma1[len(ma1)],2)
                 ma2 =final_data[i].rolling(moving_window2).mean()
                 f2=round(ma2[len(ma2)],2)
-                st.write(f2)
                 if (final_data.at[len(final_data),i]>=0) and (final_data.at[len(final_data),i]<=100):
                     if (pre_f1 > pre_f2) and (f1 < f2)  :
                         oppo.append("buy")
@@ -601,10 +600,23 @@ if option=="Automobile":
             lis=dp['Symbol'].tolist()
             dt= df[df['Name'].isin(dp['Name'])]
             dt=dt.drop_duplicates()
+            Name_l=dt['Name'].tolist()
+            
+            df_s=pd.read_csv("2_March_saturday.csv")
+            column_nam=list(df_s.columns)
+            column_nam.pop(0)
+            for col_name in column_nam:
+                vr=column_nam.index(col_name)
+                lio=[]
+                for i in Name_l:
+                    pp=df_s[df_s['Name']==i]
+                    lio.append(pp.iloc[0,vr+1])
+                dt[f'{col_name}']=lio
+                
             trs=dt.T
             
             trs.columns = trs.iloc[0]
-            trp = trs[1:2]
+            trp = trs[1:len(trs)]
             # trp
             li=dt['Name'].tolist()
 
@@ -620,20 +632,20 @@ if option=="Automobile":
             
             # Concatinating both dataframe: yfin + grow
             result = pd.concat([di, trp], ignore_index=True)
-            final_da=result.drop(len(result)-2)
+            final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
             # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
-            pre_data=final_data[0:len(final_data)-2]
+            pre_data=final_data[0:len(final_data)-len(trp)]
             
-            current_price=final_data[(len(final_data)-1):len(final_data)]
-            previous_price=final_data[(len(final_data)-2):len(final_data)-1]
+            current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
+            previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
             change_price=[]
             for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
                 change_price.append(round(change_p,2))
-            dt['Change_price']=change_price
-            
+            # dt['Change_price']=change_price
+            dt.insert(2, 'Change_price', change_price)
             oppo=[]
             for i in sl:
                 # for pre_data calculating moving average
