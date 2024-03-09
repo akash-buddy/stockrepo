@@ -1152,7 +1152,7 @@ if option=="Energy":
             result = pd.concat([di, trp], ignore_index=True)
             final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
-            # st.dataframe(final_data)
+            st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-len(trp)]
             
