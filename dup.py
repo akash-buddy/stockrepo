@@ -274,6 +274,7 @@ if option=="Nifty 100":
                     if n<5:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown('[Click here to go to another page](https://groww.in/charts/stocks/hdfc-bank-ltd?exchange=NSE)')
                     elif n>=5 and n<10:
                         with eval("com"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
