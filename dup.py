@@ -19,6 +19,7 @@ st.set_page_config(
 # tab1, tab2, tab3 = st.tabs(["Nifty 100", "Banking" , "Agriculture", "Automobile"])
 
 # with tab1:
+st.markdown('[Click here to go to another page](https://groww.in/charts/stocks/hdfc-bank-ltd?exchange=NSE)')
 
 coll1,coll2,coll3=st.columns([3,2,1])
 with coll1:
