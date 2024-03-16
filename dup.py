@@ -267,6 +267,7 @@ if option=="Nifty 100":
     
             elif filtter=="Buy":
                 stocks=dt[dt["Recommended"]=="buy"]
+                st.dataframe(stocks)
                 com1, com2, com3,com4,com5 = st.columns(5)
                 for n in range(len(stocks)):
                     o1=stocks.iloc[n,0]
@@ -275,7 +276,7 @@ if option=="Nifty 100":
                     if n<5:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                            st.markdown('[Click here to go to another page](https://groww.in/charts/stocks/hdfc-bank-ltd?exchange=NSE)')
+                            st.markdown(f'[Click here to go to another page](https://groww.in/charts/stocks/{dg}?exchange=NSE)')
                     elif n>=5 and n<10:
                         with eval("com"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
