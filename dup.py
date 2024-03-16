@@ -190,6 +190,7 @@ if option=="Nifty 100":
                     else:
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
+            dt["link"]=linkk
             
             # st.write(dt)
             if filtter=="All":
