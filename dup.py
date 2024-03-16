@@ -92,9 +92,11 @@ if option=="Nifty 100":
             
             dp=pd.read_csv("nifty_100.csv")
             lis=[]
+            linkk=[]
             for i in Name:
                 ee=dp[dp['Name']==i]
                 lis.append(ee.iloc[0,3])
+                linkk.append(ee.iloc[0,2])
             
             sl=trp.columns
             
@@ -188,6 +190,7 @@ if option=="Nifty 100":
                     else:
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
+            
             # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
