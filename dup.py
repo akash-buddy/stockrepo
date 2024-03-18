@@ -88,7 +88,7 @@ if option=="Nifty 100":
             trs=dt.T
             trs.columns = trs.iloc[0]
             trp = trs[1:len(trs)]
-            # trp
+            trp
             
             dp=pd.read_csv("nifty_100.csv")
             lis=[]
@@ -110,12 +110,14 @@ if option=="Nifty 100":
             result = pd.concat([di, trp], ignore_index=True)
             final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
-            # st.dataframe(final_data)
+            st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-len(trp)]
     
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
+            st.write(current_price)
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
+            st.write(current_price)
             change_price=[]
             for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
