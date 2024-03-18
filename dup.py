@@ -360,7 +360,7 @@ if option=="Agriculture":
             merdt=pd.merge(dp, droped_df, on='Name', how='left')
             lis=dp['Symbol'].tolist()
             linkk=dp['Link'].tolist()
-            linkk
+    
             # dt= df[df['Name'].isin(dp['Name'])]
             dt=merdt[["Name","Price"]]
             Name_l=dt['Name'].tolist()
