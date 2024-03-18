@@ -355,17 +355,13 @@ if option=="Agriculture":
             df['Name']=Name
             df['Price']=Price
             droped_df=df.drop_duplicates()
-            droped_df
             dpp=pd.read_csv("Only_nse_agriculture.csv")
             dp=dpp.drop_duplicates()
-            dp
             merdt=pd.merge(dp, droped_df, on='Name', how='left')
-            merdt
             lis=dp['Symbol'].tolist()
             linkk=dp['Link'].tolist()
             # dt= df[df['Name'].isin(dp['Name'])]
             dt=merdt[["Name","Price"]]
-            dt
             Name_l=dt['Name'].tolist()
             
             df_s=pd.read_csv("2_March_saturday.csv")
