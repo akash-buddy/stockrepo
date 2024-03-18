@@ -877,6 +877,7 @@ if option=="Banking":
             dpp=pd.read_csv("Only_nse_Banking.csv")
             dp=dpp.drop_duplicates()
             lis=dp['Symbol'].tolist()
+            linkk=dp['Link'].tolist()
             dt= df[df['Name'].isin(dp['Name'])]
             dt=dt.drop_duplicates()
             Name_l=dt['Name'].tolist()
@@ -994,6 +995,8 @@ if option=="Banking":
                     else:
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
+            dt["Link"]=linkk
+            dt
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
