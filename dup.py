@@ -105,7 +105,7 @@ if option=="Nifty 100":
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
                 di[sl[lis.index(i)]]=data["Close"] 
-            
+            di[0:len(di)-1]
             # Concatinating both dataframe: yfin + grow
             result = pd.concat([di, trp], ignore_index=True)
             result
