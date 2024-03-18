@@ -15,16 +15,16 @@ st.set_page_config(
     page_title='Akash',
     layout='wide'
 )
-ticke='ABBOTINDIA.NS'
-start_da = '2024-02-18'
-end_da = datetime.now()
-data = yf.download(ticke, start=start_da, end=end_da)
-data
+# ticke='ABBOTINDIA.NS'
+# start_da = '2024-02-18'
+# end_da = datetime.now()
+# data = yf.download(ticke, start=start_da, end=end_da)
+# data
 # tab1, tab2, tab3 = st.tabs(["Nifty 100", "Banking" , "Agriculture", "Automobile"])
 
 # with tab1:
-dg='hdfc-bank-ltd'
-st.markdown(f'[Click here to go to another page](https://groww.in/charts/stocks/{dg}?exchange=NSE)')
+# dg='hdfc-bank-ltd'
+# st.markdown(f'[Click here to go to another page](https://groww.in/charts/stocks/{dg}?exchange=NSE)')
 
 coll1,coll2,coll3=st.columns([3,2,1])
 with coll1:
@@ -92,7 +92,7 @@ if option=="Nifty 100":
             trs=dt.T
             trs.columns = trs.iloc[0]
             trp = trs[1:len(trs)]
-            trp
+            # trp
             
             dp=pd.read_csv("nifty_100.csv")
             lis=[]
@@ -106,24 +106,23 @@ if option=="Nifty 100":
             
             start_date = '2023-06-01'
             end_date = datetime.now()
-            st.write(end_date)
+            # st.write(end_date)
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
                 di[sl[lis.index(i)]]=data["Close"] 
-            di
+            
             # Concatinating both dataframe: yfin + grow
             result = pd.concat([di, trp], ignore_index=True)
-            result
             final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
-            st.dataframe(final_data)
+            # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-len(trp)]
     
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
-            st.write(current_price)
+            # st.write(current_price)
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
-            st.write(previous_price)
+            # st.write(previous_price)
             change_price=[]
             for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
@@ -199,7 +198,7 @@ if option=="Nifty 100":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["link"]=linkk
-            
+            dt
             # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
