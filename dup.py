@@ -198,7 +198,7 @@ if option=="Nifty 100":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["link"]=linkk
-            dt
+            
             # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
@@ -478,6 +478,7 @@ if option=="Agriculture":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["Link"]=linkk
+            dt
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
