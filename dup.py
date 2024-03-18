@@ -635,9 +635,10 @@ if option=="Automobile":
             df['Price']=Price
             dpp=pd.read_csv("Only_nse_automobile.csv")
             dp=dpp.drop_duplicates()
+            merdt=pd.merge(dp, droped_df, on='Name', how='left')
             lis=dp['Symbol'].tolist()
-            dt= df[df['Name'].isin(dp['Name'])]
-            dt=dt.drop_duplicates()
+            # dt= df[df['Name'].isin(dp['Name'])]
+            dt=merdt[["Name","Price"]]
             Name_l=dt['Name'].tolist()
             
             df_s=pd.read_csv("2_March_saturday.csv")
