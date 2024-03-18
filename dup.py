@@ -479,7 +479,7 @@ if option=="Agriculture":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["Link"]=linkk
-            dt
+    
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
@@ -570,8 +570,6 @@ if option=="Agriculture":
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
                     grow_link=stocks.iloc[n,5]
-                   
-                    st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                     if n<5:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
