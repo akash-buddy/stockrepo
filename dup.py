@@ -590,8 +590,16 @@ if option=="Agriculture":
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
                     grow_link=stocks.iloc[n,5]
-                    eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                    st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    if n<5:
+                        with eval("com"+str(n+1)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    elif n>=5 and n<10:
+                        with eval("com"+str(n-4)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                    # st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
             
                 # st.dataframe(stocks, use_container_width=True)
             # else:
@@ -1162,8 +1170,16 @@ if option=="Banking":
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
                     grow_link=stocks.iloc[n,5]
-                    eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
-                    st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    if n<5:
+                        with eval("com"+str(n+1)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    elif n>=5 and n<10:
+                        with eval("com"+str(n-4)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                    # st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                 # st.dataframe(stocks, use_container_width=True)
             # else:
             #     stocks=dt[dt["Recommended"]=="Wait for opportunity"]
@@ -1195,17 +1211,19 @@ if option=="Energy":
                 removequma=P.replace(",","")
                 removerupee=removequma.replace("₹","")
                 Price.append(float(removerupee))
-            
-                
                 Name.append(N[0].text)
             
             df['Name']=Name
             df['Price']=Price
+            droped_df=df.drop_duplicates()
             dpp=pd.read_csv("Only_nse_Energy.csv")
             dp=dpp.drop_duplicates()
+            merdt=pd.merge(dp, droped_df, on='Name', how='left')
+
             lis=dp['Symbol'].tolist()
-            dt= df[df['Name'].isin(dp['Name'])]
-            dt=dt.drop_duplicates()
+            linkk=dp['Link'].tolist()
+            # dt= df[df['Name'].isin(dp['Name'])]
+            dt=merdt[["Name","Price"]]
             Name_l=dt['Name'].tolist()
             
             df_s=pd.read_csv("2_March_saturday.csv")
@@ -1321,6 +1339,7 @@ if option=="Energy":
                     else:
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
+            dt["Link"]=linkk
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
@@ -1376,12 +1395,15 @@ if option=="Energy":
                     o1=dy.iloc[n,0]
                     o2=dy.iloc[n,1]
                     o3=dy.iloc[n,2]
+                    grow_link=dy.iloc[n,5]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                     elif n>=5 and n<10:
                         with eval("comm"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
             if filtter=="Top-10 Losers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dx=dt.sort_values(by='Change_price')
@@ -1389,12 +1411,15 @@ if option=="Energy":
                     o1=dx.iloc[n,0]
                     o2=dx.iloc[n,1]
                     o3=dx.iloc[n,2]
+                    grow_link=dx.iloc[n,5]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                     elif n>=5 and n<10:
                         with eval("comm"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                 
     
             elif filtter=="Buy":
@@ -1404,13 +1429,16 @@ if option=="Energy":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
+                    grow_link=stocks.iloc[n,5]
                     if n<5:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                     elif n>=5 and n<10:
                         with eval("com"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                    # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
             
                 # st.dataframe(stocks, use_container_width=True)
             
@@ -1421,7 +1449,16 @@ if option=="Energy":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                    grow_link=stocks.iloc[n,5]
+                    if n<5:
+                        with eval("com"+str(n+1)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    elif n>=5 and n<10:
+                        with eval("com"+str(n-4)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                    # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
             
                 # st.dataframe(stocks, use_container_width=True)
             # else:
