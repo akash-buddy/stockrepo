@@ -360,7 +360,7 @@ if option=="Agriculture":
             lis=dp['Symbol'].tolist()
             linkk=dp['Link'].tolist()
             # dt= df[df['Name'].isin(dp['Name'])]
-            dt=dt.drop_duplicates()
+            dt=df.drop_duplicates()
             dt
             Name_l=dt['Name'].tolist()
             
