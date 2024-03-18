@@ -15,7 +15,11 @@ st.set_page_config(
     page_title='Akash',
     layout='wide'
 )
-
+ticke='ABBOTINDIA.NS'
+start_da = '2024-02-18'
+end_da = datetime.now()
+data = yf.download(ticke, start=start_da, end=end_da)
+data
 # tab1, tab2, tab3 = st.tabs(["Nifty 100", "Banking" , "Agriculture", "Automobile"])
 
 # with tab1:
