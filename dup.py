@@ -1004,7 +1004,7 @@ if option=="Banking":
                     o1=dt.iloc[n,0]
                     o2=dt.iloc[n,1]
                     o3=dt.iloc[n,2]
-                    grow_link=dy.iloc[n,5]
+                    grow_link=dt.iloc[n,5]
                     if n<8:
                         with eval("c"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
