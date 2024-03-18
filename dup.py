@@ -36,18 +36,20 @@ with col1:
     moving1= st.number_input("Enter Big moving Average")
     moving_window1=int(moving1)
 
-col11,col12=st.columns(2)
-with col11:
+# col11,col12=st.columns(2)
+# with col11:
     moving2=st.number_input("Enter Small moving Average")
     moving_window2=int(moving2)
-col21,col22=st.columns(2)
+# col21,col22=st.columns(2)
 
-with col21:
+# with col21:
     filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top-10 Gainers','Top-10 Losers'])
-col23,col24=st.columns(2) 
-with col21:
+# col23,col24=st.columns(2) 
+# with col21:
     option = st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
+with col1:
 
+    st.write("News section")
 
 if option=="Nifty 100":
 
