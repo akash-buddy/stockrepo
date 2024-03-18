@@ -118,7 +118,7 @@ if option=="Nifty 100":
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
             st.write(current_price)
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
-            st.write(current_price)
+            st.write(previous_price)
             change_price=[]
             for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
