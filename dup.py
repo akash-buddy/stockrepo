@@ -633,6 +633,7 @@ if option=="Automobile":
             
             df['Name']=Name
             df['Price']=Price
+            droped_df=df.drop_duplicates()
             dpp=pd.read_csv("Only_nse_automobile.csv")
             dp=dpp.drop_duplicates()
             merdt=pd.merge(dp, droped_df, on='Name', how='left')
