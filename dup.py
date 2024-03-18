@@ -47,9 +47,9 @@ with col1:
 # col23,col24=st.columns(2) 
 # with col21:
     option = st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
-with col1:
+with col2:
 
-    st.write("News section")
+    st.write("News section--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 
 if option=="Nifty 100":
 
