@@ -356,10 +356,12 @@ if option=="Agriculture":
             df['Price']=Price
             dpp=pd.read_csv("Only_nse_agriculture.csv")
             dp=dpp.drop_duplicates()
+            dp
             lis=dp['Symbol'].tolist()
             linkk=dp['Link'].tolist()
             dt= df[df['Name'].isin(dp['Name'])]
             dt=dt.drop_duplicates()
+            dt
             Name_l=dt['Name'].tolist()
             
             df_s=pd.read_csv("2_March_saturday.csv")
