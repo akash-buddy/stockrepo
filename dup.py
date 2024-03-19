@@ -310,6 +310,7 @@ if option=="Nifty 100":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
+                    simsim=stocks.iloc[n,6]
                     grow_link=stocks.iloc[n,5]
                     if n<3:
                         with eval("com"+str(n+1)):
@@ -319,7 +320,7 @@ if option=="Nifty 100":
                             with tab1:
                                 st.write("comming soon")
                             with tab2:
-                                url = 'https://finance.yahoo.com/quote/AXISBANK.NS?.tsrc=fin-srch'
+                                url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
                                 soup=BeautifulSoup(webpage,'lxml')
