@@ -201,7 +201,7 @@ if option=="Nifty 100":
             dt["Recommended"]=oppo
             dt["link"]=linkk
             dt["symbol"]=lis
-            dt
+        
             # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
@@ -338,8 +338,16 @@ if option=="Nifty 100":
                             with tab1:
                                 st.write("comming soon")
                             with tab2:
-                                st.subheader("India's Paytm likely to partner with four banks for enabling UPI transactions, sources say")
-                                st.markdown(f'[Read Now](https://finance.yahoo.com/news/troubled-indian-fintech-paytm-wins-154956334.html)')
+                                url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
+                                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
+                                webpage = requests.get(url, headers=headers).text
+                                soup=BeautifulSoup(webpage,'lxml')
+                                o=soup.find_all('div',class_="Py(14px) Pos(r)")
+                                for i in o:
+                                    wnew=i.find_all('a',class_="js-content-viewer")
+                                    linnk=wnew[0]["href"]
+                                    st.subheader(wnew[0].text)
+                                    st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
             # elif filtter=="Buy":
             #     stocks=dt[dt["Recommended"]=="buy"]
             #     com1, com2, com3,com4,com5 = st.columns(5)
