@@ -314,6 +314,7 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                            tab1, tab2= st.tabs(["Nifty 100", "Banking"])
                     elif n>=2 and n<4:
                         with eval("com"+str(n-1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
