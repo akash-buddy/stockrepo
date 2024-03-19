@@ -200,7 +200,8 @@ if option=="Nifty 100":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["link"]=linkk
-            
+            dt["symbol"]=liss
+            dt
             # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
