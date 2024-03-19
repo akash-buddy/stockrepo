@@ -254,7 +254,7 @@ if option=="Nifty 100":
             if filtter=="Top-10 Gainers":
                 dy=dt.sort_values(by='Change_price',ascending=False)
                 com1, com2, com3 = st.columns(3)
-                for n in range(len(stocks)):
+                for n in range(9):
                     o1=dy.iloc[n,0]
                     o2=dy.iloc[n,1]
                     o3=dy.iloc[n,2]
