@@ -318,7 +318,7 @@ if option=="Nifty 100":
                             with tab1:
                                 st.write("comming soon")
                             with tab2:
-                                st.header("India's Paytm likely to partner with four banks for enabling UPI transactions, sources say")
+                                st.subheader("India's Paytm likely to partner with four banks for enabling UPI transactions, sources say")
                                 st.markdown(f'[Read Now](https://finance.yahoo.com/news/troubled-indian-fintech-paytm-wins-154956334.html)')
                     elif n>=2 and n<4:
                         with eval("com"+str(n-1)):
@@ -328,7 +328,7 @@ if option=="Nifty 100":
                             with tab1:
                                 st.write("comming soon")
                             with tab2:
-                                st.header("India's Paytm likely to partner with four banks for enabling UPI transactions, sources say")
+                                st.subheader("India's Paytm likely to partner with four banks for enabling UPI transactions, sources say")
                                 st.markdown(f'[Read Now](https://finance.yahoo.com/news/troubled-indian-fintech-paytm-wins-154956334.html)')
             # elif filtter=="Buy":
             #     stocks=dt[dt["Recommended"]=="buy"]
