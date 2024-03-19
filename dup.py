@@ -304,13 +304,13 @@ if option=="Nifty 100":
             #           # /news/indias-paytm-likely-partner-four-130117686.html
             elif filtter=="Buy":
                 stocks=dt[dt["Recommended"]=="buy"]
-                com1, com2 = st.columns(2)
+                com1, com2, com3 = st.columns(3)
                 for n in range(len(stocks)):
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
                     grow_link=stocks.iloc[n,5]
-                    if n<2:
+                    if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
@@ -320,8 +320,8 @@ if option=="Nifty 100":
                             with tab2:
                                 st.subheader("India's Paytm likely to partner with four banks for enabling UPI transactions, sources say")
                                 st.markdown(f'[Read Now](https://finance.yahoo.com/news/troubled-indian-fintech-paytm-wins-154956334.html)')
-                    elif n>=2 and n<4:
-                        with eval("com"+str(n-1)):
+                    elif n>=3 and n<6:
+                        with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2= st.tabs(["Fundamental", "News"])
