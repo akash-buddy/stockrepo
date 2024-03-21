@@ -397,7 +397,7 @@ if option=="Nifty 100":
                             tab1, tab2= st.tabs(["Fundamental", "News"])
                             with tab1:
                                 st.write("comming soon")
-                                urll=f'https://groww.in/charts/stocks/{grow_link}'
+                                urll=f'https://groww.in/stocks/berger-paints-india-ltd'
                                 webpag=requests.get(urll).text
                                 souppp=BeautifulSoup(webpag,'lxml')
                                 text = souppp.find_all('div', class_="col l12 stkP12Section")
