@@ -395,7 +395,7 @@ if option=="Nifty 100":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2= st.tabs(["News","Fundamental"])
-                            with tab1:
+                            with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
                                 webpag=requests.get(urll).text
@@ -430,7 +430,7 @@ if option=="Nifty 100":
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
 
-                            with tab2:
+                            with tab1:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -447,7 +447,7 @@ if option=="Nifty 100":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2= st.tabs(["News", "Fundamental"])
-                            with tab1:
+                            with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
                                 webpag=requests.get(urll).text
@@ -481,7 +481,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab2:
+                            with tab1:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -508,7 +508,7 @@ if option=="Nifty 100":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2= st.tabs(["News","Fundamental"])
-                            with tab1:
+                            with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -543,7 +543,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab2:
+                            with tab1:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -559,7 +559,7 @@ if option=="Nifty 100":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2= st.tabs(["News","Fundamental"])
-                            with tab1:
+                            with tab2:
                                 
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -594,7 +594,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab2:
+                            with tab1:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -610,7 +610,7 @@ if option=="Nifty 100":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2= st.tabs(["News","Fundamental"])
-                            with tab1:
+                            with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
                                 webpag=requests.get(urll).text
@@ -644,7 +644,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab2:
+                            with tab1:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
