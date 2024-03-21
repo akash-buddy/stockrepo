@@ -15,39 +15,25 @@ st.set_page_config(
     page_title='Akash',
     layout='wide'
 )
-# ticke='ABBOTINDIA.NS'
-# start_da = '2024-02-18'
-# end_da = datetime.now()
-# data = yf.download(ticke, start=start_da, end=end_da)
-# data
-# tab1, tab2, tab3 = st.tabs(["Nifty 100", "Banking" , "Agriculture", "Automobile"])
 
-# with tab1:
-# dg='hdfc-bank-ltd'
-# st.markdown(f'[Click here to go to another page](https://groww.in/charts/stocks/{dg}?exchange=NSE)')
 
-coll1,coll2,coll3=st.columns([3,2,1])
-with coll1:
+coll1,coll2,coll3=st.columns([1,2,1])
+with coll2:
     st.title("Try Your Moving Average")
 
 col1,col2=st.columns(2)
 
-with col1:
+with col2:
     moving1= st.number_input("Enter Big moving Average")
     moving_window1=int(moving1)
 
-# col11,col12=st.columns(2)
-# with col11:
     moving2=st.number_input("Enter Small moving Average")
     moving_window2=int(moving2)
-# col21,col22=st.columns(2)
 
-# with col21:
     filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top-10 Gainers','Top-10 Losers'])
-# col23,col24=st.columns(2) 
-# with col21:
+
     option = st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
-with col2:
+with col1:
     st.image('Banner.jpg')
 
     # st.write("News section-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
