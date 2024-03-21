@@ -396,7 +396,7 @@ if option=="Nifty 100":
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2= st.tabs(["Fundamental", "News"])
                             with tab1:
-                                st.write("comming soon")
+                                st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
                                 webpag=requests.get(urll).text
                                 souppp=BeautifulSoup(webpag,'lxml')
