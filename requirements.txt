@@ -10,3 +10,4 @@ pandas_datareader
 yfinance
 requests
 bs4 
+Pillow==9.2.0
