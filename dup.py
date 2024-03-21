@@ -394,7 +394,7 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["Fundamental", "News"])
+                            tab1, tab2= st.tabs(["News","Fundamental"])
                             with tab1:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -446,7 +446,7 @@ if option=="Nifty 100":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["Fundamental", "News"])
+                            tab1, tab2= st.tabs(["News", "Fundamental"])
                             with tab1:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -507,7 +507,7 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["Fundamental", "News"])
+                            tab1, tab2= st.tabs(["News","Fundamental"])
                             with tab1:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -558,7 +558,7 @@ if option=="Nifty 100":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["Fundamental", "News"])
+                            tab1, tab2= st.tabs(["News","Fundamental"])
                             with tab1:
                                 
                                 # st.write("Under mentenance")
@@ -609,7 +609,7 @@ if option=="Nifty 100":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["Fundamental", "News"])
+                            tab1, tab2= st.tabs(["News","Fundamental"])
                             with tab1:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
