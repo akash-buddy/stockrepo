@@ -815,6 +815,7 @@ if option=="Agriculture":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["Link"]=linkk
+            dt["symbol"]=lis
     
             if filtter=="All":
                 # st.dataframe(dt)
@@ -1099,7 +1100,8 @@ if option=="Automobile":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["Link"]=linkk
-            dt
+            dt["symbol"]=lis
+            
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
@@ -1832,6 +1834,8 @@ if option=="Energy":
                         oppo.append("Wait for opportunity")
             dt["Recommended"]=oppo
             dt["Link"]=linkk
+            dt["symbol"]=lis
+            
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
