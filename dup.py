@@ -20,9 +20,9 @@ with col27:
     image=Image.open('bull.png')
     st.image(image,use_column_width=True)
 
-coll1,coll2,coll3=st.columns([2,1,2])
+coll1,coll2,coll3=st.columns([3,1,3])
 with coll2:
-    st.title("       Try Your Moving Average")
+    st.title("Try Your Moving Average")
     st.write(" ")
     
 
