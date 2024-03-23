@@ -906,18 +906,173 @@ if option=="Agriculture":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
+                    simsim=stocks.iloc[n,6]
                     grow_link=stocks.iloc[n,5]
-                    if n<5:
+                    if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                    elif n>=5 and n<10:
-                        with eval("com"+str(n-4)):
+                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            with tab2:
+                                # st.write("comming soon")
+                                # st.write("Under mentenance")
+                                urll=f'https://groww.in/stocks/{grow_link}'
+                                webpag=requests.get(urll).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                
+                                tex = text[1].find_all('div', class_="acs67Para")
+                                about=tex[0].text
+                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                org=texx[0].text
+                                fou=texx[1].text
+                                MD=texx[2].text
+                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                org_n=tex1[0].text
+                                fou_n=tex1[1].text
+                                MD_n=tex1[2].text
+                                
+                                st.write(about)
+                                st.write(f"{org} --->> {org_n}")
+                                st.write(f"{fou} --->> {fou_n}")
+                                st.write(f"{MD} --->> {MD_n}")
+                                
+                                tb=souppp.find_all('table', class_="tb10Table col l12 ft785Table")
+                                teb_left = tb[0].find_all('tr', class_="col l6 ft785RightSpace" )
+                                teb_rigt = tb[0].find_all('tr', class_="col l6 ft785LeftSpace" )
+                                for teb in teb_left:
+                                    MC_l=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
+                                    MC_vlue_l=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
+                                    st.write(f"{MC_l[0].text} ---->> {MC_vlue_l[0].text}")
+                                for teb in teb_rigt:
+                                    MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
+                                    MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
+                                    st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
+                            with tab1:
+                                url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
+                                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
+                                webpage = requests.get(url, headers=headers).text
+                                soup=BeautifulSoup(webpage,'lxml')
+                                o=soup.find_all('div',class_="Py(14px) Pos(r)")
+                                for i in o:
+                                    wnew=i.find_all('a',class_="js-content-viewer")
+                                    linnk=wnew[0]["href"]
+                                    st.subheader(wnew[0].text)
+                                    st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                    elif n>=3 and n<6:
+                        with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                    # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            with tab2:
+                                
+                                # st.write("Under mentenance")
+                                urll=f'https://groww.in/stocks/{grow_link}'
+                                webpag=requests.get(urll).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                
+                                tex = text[1].find_all('div', class_="acs67Para")
+                                about=tex[0].text
+                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                org=texx[0].text
+                                fou=texx[1].text
+                                MD=texx[2].text
+                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                org_n=tex1[0].text
+                                fou_n=tex1[1].text
+                                MD_n=tex1[2].text
+                                
+                                st.write(about)
+                                st.write(f"{org} --->> {org_n}")
+                                st.write(f"{fou} --->> {fou_n}")
+                                st.write(f"{MD} --->> {MD_n}")
+                                
+                                tb=souppp.find_all('table', class_="tb10Table col l12 ft785Table")
+                                teb_left = tb[0].find_all('tr', class_="col l6 ft785RightSpace" )
+                                teb_rigt = tb[0].find_all('tr', class_="col l6 ft785LeftSpace" )
+                                for teb in teb_left:
+                                    MC_l=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
+                                    MC_vlue_l=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
+                                    st.write(f"{MC_l[0].text} ---->> {MC_vlue_l[0].text}")
+                                for teb in teb_rigt:
+                                    MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
+                                    MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
+                                    st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
+                            with tab1:
+                                url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
+                                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
+                                webpage = requests.get(url, headers=headers).text
+                                soup=BeautifulSoup(webpage,'lxml')
+                                o=soup.find_all('div',class_="Py(14px) Pos(r)")
+                                for i in o:
+                                    wnew=i.find_all('a',class_="js-content-viewer")
+                                    linnk=wnew[0]["href"]
+                                    st.subheader(wnew[0].text)
+                                    st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                    elif n>=6 and n<9:
+                        with eval("com"+str(n-5)):
+                            st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            with tab2:
+                                # st.write("Under mentenance")
+                                urll=f'https://groww.in/stocks/{grow_link}'
+                                webpag=requests.get(urll).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                
+                                tex = text[1].find_all('div', class_="acs67Para")
+                                about=tex[0].text
+                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                org=texx[0].text
+                                fou=texx[1].text
+                                MD=texx[2].text
+                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                org_n=tex1[0].text
+                                fou_n=tex1[1].text
+                                MD_n=tex1[2].text
+                                
+                                st.write(about)
+                                st.write(f"{org} --->> {org_n}")
+                                st.write(f"{fou} --->> {fou_n}")
+                                st.write(f"{MD} --->> {MD_n}")
+                                
+                                tb=souppp.find_all('table', class_="tb10Table col l12 ft785Table")
+                                teb_left = tb[0].find_all('tr', class_="col l6 ft785RightSpace" )
+                                teb_rigt = tb[0].find_all('tr', class_="col l6 ft785LeftSpace" )
+                                for teb in teb_left:
+                                    MC_l=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
+                                    MC_vlue_l=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
+                                    st.write(f"{MC_l[0].text} ---->> {MC_vlue_l[0].text}")
+                                for teb in teb_rigt:
+                                    MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
+                                    MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
+                                    st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
+                            with tab1:
+                                url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
+                                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
+                                webpage = requests.get(url, headers=headers).text
+                                soup=BeautifulSoup(webpage,'lxml')
+                                o=soup.find_all('div',class_="Py(14px) Pos(r)")
+                                for i in o:
+                                    wnew=i.find_all('a',class_="js-content-viewer")
+                                    linnk=wnew[0]["href"]
+                                    st.subheader(wnew[0].text)
+                                    st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+
+                #     grow_link=stocks.iloc[n,5]
+                #     if n<5:
+                #         with eval("com"+str(n+1)):
+                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                #     elif n>=5 and n<10:
+                #         with eval("com"+str(n-4)):
+                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                #     # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
             
-                # st.dataframe(stocks, use_container_width=True)
+                # # st.dataframe(stocks, use_container_width=True)
             
             elif filtter=="Sell":
                 stocks=dt[dt["Recommended"]=="sell"]
