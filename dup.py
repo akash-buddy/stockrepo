@@ -240,7 +240,7 @@ if option=="Nifty 100":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
     
             
-            if filtter=="Top-10 Gainers":
+            if filtter=="Top Gainers":
                 dy=dt.sort_values(by='Change_price',ascending=False)
                 com1, com2, com3 = st.columns(3)
                 for n in range(9):
@@ -304,7 +304,7 @@ if option=="Nifty 100":
                             #         st.subheader(wnew[0].text)
                             #         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
 
-            if filtter=="Top-10 Losers":
+            if filtter=="Top Losers":
                 dx=dt.sort_values(by='Change_price')
                 com1, com2, com3 = st.columns(3)
                 for n in range(9):
@@ -1020,7 +1020,7 @@ if option=="Agriculture":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
     
             
-            if filtter=="Top-10 Gainers":
+            if filtter=="Top Gainers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dy=dt.sort_values(by='Change_price',ascending=False)
                 for n in range(10):
@@ -1036,7 +1036,7 @@ if option=="Agriculture":
                         with eval("comm"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            if filtter=="Top-10 Losers":
+            if filtter=="Top Losers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dx=dt.sort_values(by='Change_price')
                 for n in range(10):
@@ -1615,7 +1615,7 @@ if option=="Automobile":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
     
             
-            if filtter=="Top-10 Gainers":
+            if filtter=="Top Gainers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dy=dt.sort_values(by='Change_price',ascending=False)
                 for n in range(10):
@@ -1631,7 +1631,7 @@ if option=="Automobile":
                         with eval("comm"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            if filtter=="Top-10 Losers":
+            if filtter=="Top Losers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dx=dt.sort_values(by='Change_price')
                 for n in range(10):
@@ -2222,7 +2222,7 @@ if option=="Banking":
                             # st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
     
             
-            if filtter=="Top-10 Gainers":
+            if filtter=="Top Gainers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dy=dt.sort_values(by='Change_price',ascending=False)
                 for n in range(10):
@@ -2238,7 +2238,7 @@ if option=="Banking":
                         with eval("comm"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            if filtter=="Top-10 Losers":
+            if filtter=="Top Losers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dx=dt.sort_values(by='Change_price')
                 for n in range(10):
@@ -2814,7 +2814,7 @@ if option=="Energy":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
     
             
-            if filtter=="Top-10 Gainers":
+            if filtter=="Top Gainers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dy=dt.sort_values(by='Change_price',ascending=False)
                 for n in range(10):
@@ -2830,7 +2830,7 @@ if option=="Energy":
                         with eval("comm"+str(n-4)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            if filtter=="Top-10 Losers":
+            if filtter=="Top Losers":
                 comm1,comm2,comm3,comm4,comm5= st.columns(5)
                 dx=dt.sort_values(by='Change_price')
                 for n in range(10):
