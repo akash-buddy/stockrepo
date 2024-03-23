@@ -15,7 +15,10 @@ st.set_page_config(
     page_title='Akash',
     layout='wide'
 )
-
+col17,col27,col37=st.columns([3,1,3])
+with col27:
+    image=Image.open('bull.png')
+    st.image(image,use_column_width=True)
 
 coll1,coll2,coll3=st.columns([1,2,1])
 with coll2:
