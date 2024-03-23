@@ -22,7 +22,7 @@ with col27:
 
 coll1,coll2,coll3=st.columns([1,2,1])
 with coll2:
-    st.title("Try Your Moving Average")
+    st.title("       Try Your Moving Average")
     st.write(" ")
     
 
