@@ -32,7 +32,7 @@ with col2:
     moving2=st.number_input("Enter Small moving Average")
     moving_window2=int(moving2)
 
-    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top-10 Gainers','Top-10 Losers'])
+    filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top Gainers','Top Losers'])
 
     option = st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
 with col1:
