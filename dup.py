@@ -40,7 +40,7 @@ with col2:
     option = st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
 with col1:
     image=Image.open('what.jpg')
-    edited=image.resize((3060,3000))
+    edited=image.resize((3060,2500))
     st.image(edited,use_column_width=True)
     
 
