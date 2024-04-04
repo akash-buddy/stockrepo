@@ -2264,7 +2264,7 @@ if option=="Banking":
     
             elif filtter=="Buy":
                 stocks=dt[dt["Recommended"]=="buy"]
-                com1, com2, com3,com4,com5 = st.columns(5)
+                com1, com2, com3 = st.columns(3)
                 for n in range(len(stocks)):
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
@@ -2439,7 +2439,7 @@ if option=="Banking":
             
             elif filtter=="Sell":
                 stocks=dt[dt["Recommended"]=="sell"]
-                com1, com2, com3,com4,com5 = st.columns(5)
+                com1, com2, com3 = st.columns(3)
                 for n in range(len(stocks)):
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
@@ -2856,7 +2856,7 @@ if option=="Energy":
     
             elif filtter=="Buy":
                 stocks=dt[dt["Recommended"]=="buy"]
-                com1, com2, com3,com4,com5 = st.columns(5)
+                com1, com2, com3 = st.columns(3)
                 for n in range(len(stocks)):
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
@@ -3031,7 +3031,7 @@ if option=="Energy":
             
             elif filtter=="Sell":
                 stocks=dt[dt["Recommended"]=="sell"]
-                com1, com2, com3,com4,com5 = st.columns(5)
+                com1, com2, com3 = st.columns(3)
                 for n in range(len(stocks)):
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
