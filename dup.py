@@ -435,7 +435,7 @@ if option=="Nifty 100":
                                     wnew=i.find_all('a',class_="js-content-viewer")
                                     linnk=wnew[0]["href"]
                                     ccc=wnew[0].text
-                                    st.write(ccc)
+                                    print(ccc)
                                     if ccc:
                                         st.subheader(wnew[0].text)
                                         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
