@@ -434,6 +434,9 @@ if option=="Nifty 100":
                                 for i in o:
                                     wnew=i.find_all('a',class_="js-content-viewer")
                                     linnk=wnew[0]["href"]
+                                    linnk
+                                    ccc=wnew[0].text
+                                    ccc
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
                     elif n>=3 and n<6:
