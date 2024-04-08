@@ -434,11 +434,12 @@ if option=="Nifty 100":
                                 for i in o:
                                     wnew=i.find_all('a',class_="js-content-viewer")
                                     linnk=wnew[0]["href"]
-                                    linnk
                                     ccc=wnew[0].text
-                                    ccc
-                                    st.subheader(wnew[0].text)
-                                    st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                                    if ccc:
+                                        st.subheader(wnew[0].text)
+                                        st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                                    else:
+                                        st.subheader("No News")
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
