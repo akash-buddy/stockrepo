@@ -390,10 +390,13 @@ if option=="Nifty 100":
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
                             tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            urll=f'https://groww.in/stocks/{grow_link}'
+                            webpag=requests.get(urll).text
+                            souppp=BeautifulSoup(webpag,'lxml')
                             with tab1:
-                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
-                                webpag=requests.get(uri).text
-                                souppp=BeautifulSoup(webpag,'lxml')
+                                # uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                # webpag=requests.get(uri).text
+                                # souppp=BeautifulSoup(webpag,'lxml')
                                 tett = souppp.find_all('div', class_="row col l12 shp76Row")
                                 for inde_el in tett:
                                     holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
@@ -403,9 +406,9 @@ if option=="Nifty 100":
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
-                                urll=f'https://groww.in/stocks/{grow_link}'
-                                webpag=requests.get(urll).text
-                                souppp=BeautifulSoup(webpag,'lxml')
+                                # urll=f'https://groww.in/stocks/{grow_link}'
+                                # webpag=requests.get(urll).text
+                                # souppp=BeautifulSoup(webpag,'lxml')
                                 text = souppp.find_all('div', class_="col l12 stkP12Section")
                                 
                                 tex = text[1].find_all('div', class_="acs67Para")
