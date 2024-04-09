@@ -2083,7 +2083,7 @@ if option=="Banking":
             result = pd.concat([di, trp], ignore_index=True)
             final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
-            st.dataframe(final_data)
+            # st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-len(trp)]
 
@@ -2136,8 +2136,6 @@ if option=="Banking":
                 elif (final_data.at[len(final_data),i]>=501) and (final_data.at[len(final_data),i]<=1000):
                     if (pre_f1 > pre_f2) and (f1 < f2) :
                         oppo.append("buy")
-                        st.write(f1)
-                        st.write(f2)
                     elif (pre_f1 < pre_f2) and (f1 > f2) :
                         oppo.append("sell")
                     else:
