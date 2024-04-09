@@ -451,7 +451,16 @@ if option=="Nifty 100":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -487,7 +496,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -502,7 +511,16 @@ if option=="Nifty 100":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -537,7 +555,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -668,7 +686,16 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -704,7 +731,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -719,7 +746,16 @@ if option=="Nifty 100":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -755,7 +791,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -770,7 +806,16 @@ if option=="Nifty 100":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -805,7 +850,7 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1084,7 +1129,16 @@ if option=="Agriculture":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -1120,7 +1174,7 @@ if option=="Agriculture":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1135,7 +1189,16 @@ if option=="Agriculture":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -1171,7 +1234,7 @@ if option=="Agriculture":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1186,7 +1249,16 @@ if option=="Agriculture":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -1221,7 +1293,7 @@ if option=="Agriculture":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1259,7 +1331,16 @@ if option=="Agriculture":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -1295,7 +1376,7 @@ if option=="Agriculture":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1310,7 +1391,16 @@ if option=="Agriculture":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -1346,7 +1436,7 @@ if option=="Agriculture":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1361,7 +1451,16 @@ if option=="Agriculture":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -1396,7 +1495,7 @@ if option=="Agriculture":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1679,7 +1778,16 @@ if option=="Automobile":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -1715,7 +1823,7 @@ if option=="Automobile":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1730,7 +1838,16 @@ if option=="Automobile":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -1766,7 +1883,7 @@ if option=="Automobile":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1781,7 +1898,16 @@ if option=="Automobile":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -1816,7 +1942,7 @@ if option=="Automobile":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1854,7 +1980,16 @@ if option=="Automobile":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -1890,7 +2025,7 @@ if option=="Automobile":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1905,7 +2040,16 @@ if option=="Automobile":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -1941,7 +2085,7 @@ if option=="Automobile":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -1956,7 +2100,16 @@ if option=="Automobile":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -1991,7 +2144,7 @@ if option=="Automobile":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2286,7 +2439,16 @@ if option=="Banking":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -2322,7 +2484,7 @@ if option=="Banking":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2337,7 +2499,16 @@ if option=="Banking":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -2373,7 +2544,7 @@ if option=="Banking":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2388,7 +2559,16 @@ if option=="Banking":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -2423,7 +2603,7 @@ if option=="Banking":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2461,7 +2641,16 @@ if option=="Banking":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -2497,7 +2686,7 @@ if option=="Banking":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2512,7 +2701,16 @@ if option=="Banking":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -2548,7 +2746,7 @@ if option=="Banking":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2563,7 +2761,16 @@ if option=="Banking":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -2598,7 +2805,7 @@ if option=="Banking":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2878,7 +3085,16 @@ if option=="Energy":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -2914,7 +3130,7 @@ if option=="Energy":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2929,7 +3145,16 @@ if option=="Energy":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -2965,7 +3190,7 @@ if option=="Energy":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -2980,7 +3205,16 @@ if option=="Energy":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -3015,7 +3249,7 @@ if option=="Energy":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -3054,7 +3288,16 @@ if option=="Energy":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("comming soon")
                                 # st.write("Under mentenance")
@@ -3090,7 +3333,7 @@ if option=="Energy":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -3105,7 +3348,16 @@ if option=="Energy":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 
                                 # st.write("Under mentenance")
@@ -3141,7 +3393,7 @@ if option=="Energy":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
@@ -3156,7 +3408,16 @@ if option=="Energy":
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2= st.tabs(["News","Fundamental"])
+                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            with tab1:
+                                uri=f'https://groww.in/stocks/{grow_link}/share-holding'
+                                webpag=requests.get(uri).text
+                                souppp=BeautifulSoup(webpag,'lxml')
+                                tett = souppp.find_all('div', class_="row col l12 shp76Row")
+                                for inde_el in tett:
+                                    holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
+                                    percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
+                                    st.write(f"{holder[0].text} --->> {percentge[0].text}")
                             with tab2:
                                 # st.write("Under mentenance")
                                 urll=f'https://groww.in/stocks/{grow_link}'
@@ -3191,7 +3452,7 @@ if option=="Energy":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                            with tab1:
+                            with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
                                 webpage = requests.get(url, headers=headers).text
