@@ -2977,6 +2977,7 @@ if option=="Energy":
                     o3=stocks.iloc[n,2]
                     simsim=stocks.iloc[n,6]
                     grow_link=stocks.iloc[n,5]
+                    st.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -3037,8 +3038,6 @@ if option=="Energy":
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
                     elif n>=3 and n<6:
-                        if n=3:
-                            st.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
