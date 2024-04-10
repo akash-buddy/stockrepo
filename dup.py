@@ -2970,6 +2970,7 @@ if option=="Energy":
     
             elif filtter=="Buy":
                 stocks=dt[dt["Recommended"]=="buy"]
+                st.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
                 com1, com2, com3 = st.columns(3)
                 for n in range(len(stocks)):
                     o1=stocks.iloc[n,0]
@@ -2977,7 +2978,7 @@ if option=="Energy":
                     o3=stocks.iloc[n,2]
                     simsim=stocks.iloc[n,6]
                     grow_link=stocks.iloc[n,5]
-                    st.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
