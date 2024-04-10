@@ -15,10 +15,7 @@ st.set_page_config(
     page_title='Akash',
     layout='wide'
 )
-resu=st.button("click")
-st.write(resu)
-if resu:
-    st.write("worked")
+
 col17,col27,col37=st.columns([3,1,3])
 with col27:
     image=Image.open('bull.png')
@@ -42,19 +39,19 @@ with col2:
     filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top Gainers','Top Losers'])
 
     option = st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
+
+    butto=st.button("Refresh")
 with col1:
     image=Image.open('what.jpg')
     edited=image.resize((3060,1900))
     st.image(edited,use_column_width=True)
-    
 
-    # st.write("News section-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+
 
 if option=="Nifty 100":
-
     
     di= pd.DataFrame()
-    if st.button("Refresh"):
+    if butto:
         
         with st.spinner('Wait for few seconds.....'):
             
