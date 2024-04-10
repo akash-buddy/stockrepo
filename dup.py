@@ -788,7 +788,7 @@ if option=="Nifty 100":
 if option=="Agriculture":
     
     di= pd.DataFrame()
-    if st.button("Refresh"):
+    if butto:
         
         with st.spinner('Wait for few seconds.....'):
             
@@ -1047,15 +1047,18 @@ if option=="Agriculture":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1103,15 +1106,18 @@ if option=="Agriculture":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1159,15 +1165,18 @@ if option=="Agriculture":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1238,15 +1247,18 @@ if option=="Agriculture":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1294,15 +1306,18 @@ if option=="Agriculture":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1350,15 +1365,18 @@ if option=="Agriculture":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1418,7 +1436,7 @@ if option=="Agriculture":
 if option=="Automobile":
     
     di= pd.DataFrame()
-    if st.button("Refresh"):
+    if butto:
         
         with st.spinner('Wait for few seconds.....'):
             
@@ -1674,15 +1692,18 @@ if option=="Automobile":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1730,15 +1751,18 @@ if option=="Automobile":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1786,15 +1810,18 @@ if option=="Automobile":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1865,15 +1892,18 @@ if option=="Automobile":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1921,15 +1951,18 @@ if option=="Automobile":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -1977,15 +2010,18 @@ if option=="Automobile":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2043,7 +2079,7 @@ if option=="Automobile":
 if option=="Banking":
     
     di= pd.DataFrame()
-    if st.button("Refresh"):
+    if butto:
         
         with st.spinner('Wait for few seconds.....'):
             
@@ -2315,15 +2351,18 @@ if option=="Banking":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2371,15 +2410,18 @@ if option=="Banking":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2427,15 +2469,18 @@ if option=="Banking":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2506,15 +2551,18 @@ if option=="Banking":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2562,15 +2610,18 @@ if option=="Banking":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2618,15 +2669,18 @@ if option=="Banking":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2682,7 +2736,7 @@ if option=="Banking":
 if option=="Energy":
     
     di= pd.DataFrame()
-    if st.button("Refresh"):
+    if butto:
         
         with st.spinner('Wait for few seconds.....'):
             
@@ -2939,15 +2993,18 @@ if option=="Energy":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -2995,15 +3052,18 @@ if option=="Energy":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -3051,15 +3111,18 @@ if option=="Energy":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -3131,15 +3194,18 @@ if option=="Energy":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -3187,15 +3253,18 @@ if option=="Energy":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
@@ -3243,15 +3312,18 @@ if option=="Energy":
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
                                 
                             with tab2:
-                                text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
+                                texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
+                                tex1 = souppp.find_all('td', class_="aboutCompany_tdValue__Ioaru right-align bodyLargeHeavy")
                                 
-                                tex = text[1].find_all('div', class_="acs67Para")
+                                # text = souppp.find_all('div', class_="col l12 stkP12Section")
+                                # tex = text[1].find_all('div', class_="acs67Para")
                                 about=tex[0].text
-                                texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
+                                # texx = text[1].find_all('td', class_="acs67Head left-align bodyBase")
                                 org=texx[0].text
                                 fou=texx[1].text
                                 MD=texx[2].text
-                                tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
+                                # tex1 = text[1].find_all('td', class_="acs67Value right-align bodyLarge")
                                 org_n=tex1[0].text
                                 fou_n=tex1[1].text
                                 MD_n=tex1[2].text
