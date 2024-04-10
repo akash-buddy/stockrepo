@@ -15,6 +15,10 @@ st.set_page_config(
     page_title='Akash',
     layout='wide'
 )
+resu=st.button("click")
+st.write(resu)
+if resu:
+    st.write("worked")
 col17,col27,col37=st.columns([3,1,3])
 with col27:
     image=Image.open('bull.png')
