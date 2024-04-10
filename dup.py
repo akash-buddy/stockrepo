@@ -40,7 +40,7 @@ with col2:
 
     option = st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
 
-    # butto=st.button("Refresh")
+    butto=st.button("Refresh")
 with col1:
     image=Image.open('what.jpg')
     edited=image.resize((3060,1900))
@@ -51,7 +51,7 @@ with col1:
 if option=="Nifty 100":
     
     di= pd.DataFrame()
-    if st.button("Refresh"):
+    if butto:
         
         with st.spinner('Wait for few seconds.....'):
             
