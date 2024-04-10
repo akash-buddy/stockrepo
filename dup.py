@@ -15,7 +15,7 @@ st.set_page_config(
     page_title='Akash',
     layout='wide'
 )
-st.metric(label="Gas price", value=4, delta="0.5%")
+
 
 col17,col27,col37=st.columns([3,1,3])
 with col27:
