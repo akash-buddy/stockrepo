@@ -47,7 +47,7 @@ with col1:
     edited=image.resize((3060,1900))
     st.image(edited,use_column_width=True)
 
-
+st.wtite("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 
 if option=="Nifty 100":
     
@@ -262,56 +262,17 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            # tab1, tab2= st.tabs(["Fundamental", "News"])
-                            # with tab1:
-                            #     st.write("comming soon")
-                            # with tab2:
-                            #     url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
-                            #     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
-                            #     webpage = requests.get(url, headers=headers).text
-                            #     soup=BeautifulSoup(webpage,'lxml')
-                            #     o=soup.find_all('div',class_="Py(14px) Pos(r)")
-                            #     for i in o:
-                            #         wnew=i.find_all('a',class_="js-content-viewer")
-                            #         linnk=wnew[0]["href"]
-                            #         st.subheader(wnew[0].text)
-                            #         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            # tab1, tab2= st.tabs(["Fundamental", "News"])
-                            # with tab1:
-                            #     st.write("comming soon")
-                            # with tab2:
-                            #     url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
-                            #     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
-                            #     webpage = requests.get(url, headers=headers).text
-                            #     soup=BeautifulSoup(webpage,'lxml')
-                            #     o=soup.find_all('div',class_="Py(14px) Pos(r)")
-                            #     for i in o:
-                            #         wnew=i.find_all('a',class_="js-content-viewer")
-                            #         linnk=wnew[0]["href"]
-                            #         st.subheader(wnew[0].text)
-                            #         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            # tab1, tab2= st.tabs(["Fundamental", "News"])
-                            # with tab1:
-                            #     st.write("comming soon")
-                            # with tab2:
-                            #     url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
-                            #     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
-                            #     webpage = requests.get(url, headers=headers).text
-                            #     soup=BeautifulSoup(webpage,'lxml')
-                            #     o=soup.find_all('div',class_="Py(14px) Pos(r)")
-                            #     for i in o:
-                            #         wnew=i.find_all('a',class_="js-content-viewer")
-                            #         linnk=wnew[0]["href"]
-                            #         st.subheader(wnew[0].text)
-                            #         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            
 
             if filtter=="Top Losers":
                 dx=dt.sort_values(by='Change_price')
@@ -326,56 +287,17 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            # tab1, tab2= st.tabs(["Fundamental", "News"])
-                            # with tab1:
-                            #     st.write("comming soon")
-                            # with tab2:
-                            #     url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
-                            #     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
-                            #     webpage = requests.get(url, headers=headers).text
-                            #     soup=BeautifulSoup(webpage,'lxml')
-                            #     o=soup.find_all('div',class_="Py(14px) Pos(r)")
-                            #     for i in o:
-                            #         wnew=i.find_all('a',class_="js-content-viewer")
-                            #         linnk=wnew[0]["href"]
-                            #         st.subheader(wnew[0].text)
-                            #         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                      
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            # tab1, tab2= st.tabs(["Fundamental", "News"])
-                            # with tab1:
-                            #     st.write("comming soon")
-                            # with tab2:
-                            #     url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
-                            #     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
-                            #     webpage = requests.get(url, headers=headers).text
-                            #     soup=BeautifulSoup(webpage,'lxml')
-                            #     o=soup.find_all('div',class_="Py(14px) Pos(r)")
-                            #     for i in o:
-                            #         wnew=i.find_all('a',class_="js-content-viewer")
-                            #         linnk=wnew[0]["href"]
-                            #         st.subheader(wnew[0].text)
-                            #         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            # tab1, tab2= st.tabs(["Fundamental", "News"])
-                            # with tab1:
-                            #     st.write("comming soon")
-                            # with tab2:
-                            #     url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
-                            #     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
-                            #     webpage = requests.get(url, headers=headers).text
-                            #     soup=BeautifulSoup(webpage,'lxml')
-                            #     o=soup.find_all('div',class_="Py(14px) Pos(r)")
-                            #     for i in o:
-                            #         wnew=i.find_all('a',class_="js-content-viewer")
-                            #         linnk=wnew[0]["href"]
-                            #         st.subheader(wnew[0].text)
-                            #         st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            
 
 
             
