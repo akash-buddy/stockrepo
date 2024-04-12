@@ -204,7 +204,7 @@ if option=="Nifty 100":
             
             dt["link"]=linkk
             dt["symbol"]=lis
-            dt
+
             # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
