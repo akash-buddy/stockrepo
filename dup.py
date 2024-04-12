@@ -133,7 +133,7 @@ if option=="Nifty 100":
             dt.insert(2, 'Change_price', change_price)
             dt
             st.write(len(final_data))
-            # final_data.at[len(final_data),]
+            st.write(final_data.at[len(final_data),"Abbott India"])
             oppo=[]
             for i in sl:
                 # for pre_data calculating moving average
