@@ -104,17 +104,18 @@ if option=="Nifty 100":
             sl=trp.columns
             
             start_date = '2023-06-01'
-            end_date = '2024-04-12'
-            # end_date = datetime.now()
-            # st.write(end_date)
+            # end_date = '2024-04-12'
+            end_date = datetime.now()
+            
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
                 di[sl[lis.index(i)]]=data["Close"] 
             di
             # Concatinating both dataframe: yfin + grow
             result = pd.concat([di, trp], ignore_index=True)
-            final_da=result.drop(len(result)-(len(trp)+1))
-            final_data=final_da.fillna(0)
+            final_data=result.fillna(0)
+            # final_da=result.drop(len(result)-(len(trp)+1))
+            # final_data=final_da.fillna(0)
             st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
             pre_data=final_data[0:len(final_data)-len(trp)]
