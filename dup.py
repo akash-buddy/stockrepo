@@ -132,7 +132,7 @@ if option=="Nifty 100":
             # dt['Change_price']=change_price
             dt.insert(2, 'Change_price', change_price)
             dt
-            len(final_data)
+            st.write(len(final_data))
             # final_data.at[len(final_data),]
             oppo=[]
             for i in sl:
