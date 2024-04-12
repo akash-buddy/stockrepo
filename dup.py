@@ -104,7 +104,8 @@ if option=="Nifty 100":
             sl=trp.columns
             
             start_date = '2023-06-01'
-            end_date = datetime.now()
+            end_date = '2024-04-10'
+            # end_date = datetime.now()
             # st.write(end_date)
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
