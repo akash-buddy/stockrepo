@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
-# import pandas_datareader as web
-from pandas_datareader import data as pdr
+import pandas_datareader as web
+# from pandas_datareader import data as pdr
 import yfinance as yf
 # import time
 import requests
@@ -386,7 +386,8 @@ if option=="Nifty 100":
                                 
                                 
                                 user_input=simsim
-                                df= pdr.get_data_yahoo(user_input, start, end)
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
                                 st.subheader("Closing Price vs Time chart")
                                 fig=plt.figure(figsize=(12,6))
                                 plt.plot(df.Close,'b')
