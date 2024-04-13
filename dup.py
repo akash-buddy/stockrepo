@@ -324,7 +324,7 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Prediction"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -449,18 +449,17 @@ if option=="Nifty 100":
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
-                            
                             with tab1:
                                 tett = souppp.find_all('div', class_="row col l12 shp76Row")
                                 for inde_el in tett:
                                     holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
                                     percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
-                                    
+                                
                             with tab2:
                                 tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
                                 texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
@@ -494,7 +493,6 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                                    
                             with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
@@ -506,23 +504,80 @@ if option=="Nifty 100":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
                                     
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
-                            
                             with tab1:
                                 tett = souppp.find_all('div', class_="row col l12 shp76Row")
                                 for inde_el in tett:
                                     holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
                                     percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
-
+                                
                             with tab2:
                                 tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
                                 texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
@@ -544,7 +599,7 @@ if option=="Nifty 100":
                                 st.write(f"{org} --->> {org_n}")
                                 st.write(f"{fou} --->> {fou_n}")
                                 st.write(f"{MD} --->> {MD_n}")
-
+                                
                                 tb=souppp.find_all('table', class_="tb10Table col l12 ft785Table")
                                 teb_left = tb[0].find_all('tr', class_="col l6 ft785RightSpace" )
                                 teb_rigt = tb[0].find_all('tr', class_="col l6 ft785LeftSpace" )
@@ -556,7 +611,6 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                                    
                             with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
@@ -568,6 +622,64 @@ if option=="Nifty 100":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
 
                     
             
@@ -584,18 +696,17 @@ if option=="Nifty 100":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
-                            
                             with tab1:
                                 tett = souppp.find_all('div', class_="row col l12 shp76Row")
                                 for inde_el in tett:
                                     holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
                                     percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
-                                    
+                                
                             with tab2:
                                 tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
                                 texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
@@ -640,23 +751,80 @@ if option=="Nifty 100":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
                                     
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
-                            
                             with tab1:
                                 tett = souppp.find_all('div', class_="row col l12 shp76Row")
                                 for inde_el in tett:
                                     holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
                                     percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
-                                    
+                                
                             with tab2:
                                 tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
                                 texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
@@ -690,7 +858,6 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                                    
                             with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
@@ -702,23 +869,80 @@ if option=="Nifty 100":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
                                     
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
-                            
                             with tab1:
                                 tett = souppp.find_all('div', class_="row col l12 shp76Row")
                                 for inde_el in tett:
                                     holder= tett[tett.index(inde_el)].find_all('div', class_="bodyLarge")
                                     percentge = tett[tett.index(inde_el)].find_all('div', class_="shp76TextRight")
                                     st.write(f"{holder[0].text} --->> {percentge[0].text}")
-                                    
+                                
                             with tab2:
                                 tex = souppp.find_all('div', class_="aboutCompany_summary__uP8fZ")
                                 texx = souppp.find_all('td', class_="contentSecondary left-align bodyBase")
@@ -752,7 +976,6 @@ if option=="Nifty 100":
                                     MC_r=teb.find_all('td', class_="ft785Head left-align contentSecondary bodyBase" )
                                     MC_vlue_r=teb.find_all('td', class_="ft785Value right-align contentPrimary bodyLargeHeavy" )
                                     st.write(f"{MC_r[0].text} ---->> {MC_vlue_r[0].text}")
-                                    
                             with tab3:
                                 url = f'https://finance.yahoo.com/quote/{simsim}?.tsrc=fin-srch'
                                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
@@ -764,6 +987,64 @@ if option=="Nifty 100":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
 
 
 
@@ -1032,7 +1313,7 @@ if option=="Agriculture":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1087,11 +1368,70 @@ if option=="Agriculture":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1146,11 +1486,70 @@ if option=="Agriculture":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1205,19 +1604,66 @@ if option=="Agriculture":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
-
-                #     grow_link=stocks.iloc[n,5]
-                #     if n<5:
-                #         with eval("com"+str(n+1)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     elif n>=5 and n<10:
-                #         with eval("com"+str(n-4)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
             
-                # # st.dataframe(stocks, use_container_width=True)
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+
+                
             
             elif filtter=="Sell":
                 stocks=dt[dt["Recommended"]=="sell"]
@@ -1232,7 +1678,7 @@ if option=="Agriculture":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1287,11 +1733,70 @@ if option=="Agriculture":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1346,11 +1851,70 @@ if option=="Agriculture":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1405,23 +1969,66 @@ if option=="Agriculture":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
-
-            #         grow_link=stocks.iloc[n,5]
-            #         if n<5:
-            #             with eval("com"+str(n+1)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         elif n>=5 and n<10:
-            #             with eval("com"+str(n-4)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #         # st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
             
-            #     # st.dataframe(stocks, use_container_width=True)
-            # # else:
-            # #     stocks=dt[dt["Recommended"]=="Wait for opportunity"]
-            #     # st.dataframe(stocks, use_container_width=True) 
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+
+             
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1677,7 +2284,7 @@ if option=="Automobile":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1732,11 +2339,70 @@ if option=="Automobile":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1791,11 +2457,70 @@ if option=="Automobile":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1850,19 +2575,66 @@ if option=="Automobile":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
-
-                #     grow_link=stocks.iloc[n,5]
-                #     if n<5:
-                #         with eval("com"+str(n+1)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     elif n>=5 and n<10:
-                #         with eval("com"+str(n-4)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
             
-                # # st.dataframe(stocks, use_container_width=True)
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+
+
             
             elif filtter=="Sell":
                 stocks=dt[dt["Recommended"]=="sell"]
@@ -1877,7 +2649,7 @@ if option=="Automobile":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1932,11 +2704,70 @@ if option=="Automobile":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -1991,11 +2822,70 @@ if option=="Automobile":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -2050,23 +2940,66 @@ if option=="Automobile":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
-
-            #         grow_link=stocks.iloc[n,5]
-            #         if n<5:
-            #             with eval("com"+str(n+1)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         elif n>=5 and n<10:
-            #             with eval("com"+str(n-4)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #         # st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
             
-            #     # st.dataframe(stocks, use_container_width=True)
-            # # else:
-            # #     stocks=dt[dt["Recommended"]=="Wait for opportunity"]
-            #     # st.dataframe(stocks, use_container_width=True) 
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+
+            
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2336,7 +3269,7 @@ if option=="Banking":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -2391,11 +3324,70 @@ if option=="Banking":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -2450,11 +3442,70 @@ if option=="Banking":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -2509,19 +3560,66 @@ if option=="Banking":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
-
-                #     grow_link=stocks.iloc[n,5]
-                #     if n<5:
-                #         with eval("com"+str(n+1)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     elif n>=5 and n<10:
-                #         with eval("com"+str(n-4)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
             
-                # # st.dataframe(stocks, use_container_width=True)
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+
+
             
             elif filtter=="Sell":
                 stocks=dt[dt["Recommended"]=="sell"]
@@ -2536,7 +3634,7 @@ if option=="Banking":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -2591,11 +3689,70 @@ if option=="Banking":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -2650,11 +3807,70 @@ if option=="Banking":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -2709,22 +3925,66 @@ if option=="Banking":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
 
-            #         grow_link=stocks.iloc[n,5]
-            #         if n<5:
-            #             with eval("com"+str(n+1)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         elif n>=5 and n<10:
-            #             with eval("com"+str(n-4)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
-            #         # st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #     # st.dataframe(stocks, use_container_width=True)
-            # # else:
-            # #     stocks=dt[dt["Recommended"]=="Wait for opportunity"]
-            #     # st.dataframe(stocks, use_container_width=True) 
+ 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2979,7 +4239,7 @@ if option=="Energy":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -3034,11 +4294,70 @@ if option=="Energy":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -3093,11 +4412,70 @@ if option=="Energy":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -3152,19 +4530,67 @@ if option=="Energy":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
-
-                #     grow_link=stocks.iloc[n,5]
-                #     if n<5:
-                #         with eval("com"+str(n+1)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     elif n>=5 and n<10:
-                #         with eval("com"+str(n-4)):
-                #             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-                #             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                #     # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
             
-                # # st.dataframe(stocks, use_container_width=True)
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
+
+               
             
             elif filtter=="Sell":
                 stocks=dt[dt["Recommended"]=="sell"]
@@ -3180,7 +4606,7 @@ if option=="Energy":
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -3235,11 +4661,70 @@ if option=="Energy":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -3294,11 +4779,70 @@ if option=="Energy":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+            
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+                                
                     elif n>=6 and n<9:
                         with eval("com"+str(n-5)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
                             st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-                            tab1, tab2,tab3= st.tabs(["Shareholding","Fundamental","News"])
+                            tab1, tab2,tab3,tab4= st.tabs(["Shareholding","Fundamental","News","Trend Prediction"])
                             urll=f'https://groww.in/stocks/{grow_link}'
                             webpag=requests.get(urll).text
                             souppp=BeautifulSoup(webpag,'lxml')
@@ -3353,22 +4897,66 @@ if option=="Energy":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
-
-            #         grow_link=stocks.iloc[n,5]
-            #         if n<5:
-            #             with eval("com"+str(n+1)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         elif n>=5 and n<10:
-            #             with eval("com"+str(n-4)):
-            #                 st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
-            #                 st.markdown(f'[Click here to Invest](https://groww.in/charts/stocks/{grow_link}?exchange=NSE)')
-            #         # eval("com"+str(n+1)).metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹") 
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
             
-            #     # st.dataframe(stocks, use_container_width=True)
-            # # else:
-            # #     stocks=dt[dt["Recommended"]=="Wait for opportunity"]
-            #     # st.dataframe(stocks, use_container_width=True) 
+                                user_input=simsim
+                                st.write(user_input)
+                                df= yf.download(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+                                
+                                # mov1 =final_data[o1].rolling(moving_window1).mean()
+                                # mov2 =final_data[o1].rolling(moving_window2).mean()
+                                mov1=df.Close.rolling(moving_window1).mean()
+                                mov2=df.Close.rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
+                                data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
+                                
+                                from sklearn.preprocessing import MinMaxScaler
+                                scaler = MinMaxScaler(feature_range=(0,1))
+                                
+                                data_training_array = scaler.fit_transform(data_training)
+                                model = load_model('keras_model.h5')
+                                
+                                past_100_days = data_training.tail(100)
+                                final_df=past_100_days.append(data_testing,ignore_index=True)
+                                input_data = scaler.fit_transform(final_df)
+                                
+                                x_test = []
+                                y_test = []
+                                
+                                for i in range(100,input_data.shape[0]):
+                                    x_test.append(input_data[i-100:i])
+                                    y_test.append(input_data[i,0])
+                                
+                                x_test,y_test = np.array(x_test),np.array(y_test)
+                                
+                                y_predicted = model.predict(x_test)
+                                
+                                scal=scaler.scale_
+                                
+                                scale_factor = 1/scal[0]
+                                y_predicted=y_predicted*scale_factor
+                                y_test=y_test*scale_factor
+                                
+                                st.subheader("Predictions vs Original")
+                                fig2 = plt.figure(figsize=(12,6))
+                                plt.plot(y_test,'b',label='Original Price')
+                                plt.plot(y_predicted,'g',label='Predicted Price')
+                                plt.xlabel('Time')
+                                plt.ylabel('Price')
+                                st.pyplot(fig2)
+
+            
 
 
 
