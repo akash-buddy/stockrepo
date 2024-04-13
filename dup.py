@@ -383,8 +383,7 @@ if option=="Nifty 100":
                             with tab4:
                                 end = datetime.now()
                                 start = datetime(end.year - 10, end.month, end.day)
-                                
-                                
+            
                                 user_input=simsim
                                 st.write(user_input)
                                 df= yf.download(user_input, start, end)
@@ -392,7 +391,10 @@ if option=="Nifty 100":
                                 fig=plt.figure(figsize=(12,6))
                                 plt.plot(df.Close,'b')
                                 st.pyplot(fig)
-
+                                mov1 =final_data[o1].rolling(moving_window1).mean()
+                                mov2 =final_data[o1].rolling(moving_window2).mean()
+                                st.write(mov1)
+                                st.write(mov2)
                     
                                     
                     elif n>=3 and n<6:
