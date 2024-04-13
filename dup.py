@@ -391,8 +391,15 @@ if option=="Nifty 100":
                                 fig=plt.figure(figsize=(12,6))
                                 plt.plot(df.Close,'b')
                                 st.pyplot(fig)
+                                
                                 mov1 =final_data[o1].rolling(moving_window1).mean()
                                 mov2 =final_data[o1].rolling(moving_window2).mean()
+                                figg=plt.figure(figsize=(12,6))
+                                plt.plot(mov2,'g')
+                                plt.plot(mov1,'r')
+                                plt.plot(df.Close,'b')
+                                st.pyplot(figg)
+                                
                                 st.write(mov1)
                                 st.write(mov2)
                     
