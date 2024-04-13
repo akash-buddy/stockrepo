@@ -111,7 +111,7 @@ if option=="Nifty 100":
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
                 di[sl[lis.index(i)]]=data["Close"] 
-            di
+            # di
             # Concatinating both dataframe: yfin + grow
             result = pd.concat([di, trp], ignore_index=True)
             # final_data=result.fillna(0)
@@ -123,14 +123,13 @@ if option=="Nifty 100":
             # st.dataframe(pre_data)
     
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
-            st.write(current_price)
+            # st.write(current_price)
 
             
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
             # previous_price=di.tail(1)
+            # st.write(previous_price)
 
-            
-            st.write(previous_price)
             change_price=[]
             for i in range(len(sl)):
                 change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
