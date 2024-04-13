@@ -441,8 +441,8 @@ if option=="Nifty 100":
 
 
                                 
-                                st.write(mov1)
-                                st.write(mov2)
+                                # st.write(mov1)
+                                # st.write(mov2)
                     
                                     
                     elif n>=3 and n<6:
