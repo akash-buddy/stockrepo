@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
-import pandas_datareader as web
+# import pandas_datareader as web
+from pandas_datareader import data as pdr
 import yfinance as yf
 # import time
 import requests
@@ -379,6 +380,19 @@ if option=="Nifty 100":
                                     linnk=wnew[0]["href"]
                                     st.subheader(wnew[0].text)
                                     st.markdown(f'[Read Now](https://finance.yahoo.com{linnk})')
+                            with tab4:
+                                end = datetime.now()
+                                start = datetime(end.year - 10, end.month, end.day)
+                                
+                                
+                                user_input=simsim
+                                df= pdr.get_data_yahoo(user_input, start, end)
+                                st.subheader("Closing Price vs Time chart")
+                                fig=plt.figure(figsize=(12,6))
+                                plt.plot(df.Close,'b')
+                                st.pyplot(fig)
+
+                    
                                     
                     elif n>=3 and n<6:
                         with eval("com"+str(n-2)):
