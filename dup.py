@@ -525,7 +525,7 @@ if option=="Nifty 100":
                                 figg=plt.figure(figsize=(12,6))
                                 plt.plot(mov2,'g')
                                 plt.plot(mov1,'r')
-                                plt.plot(df.Close,'b')
+                                # plt.plot(df.Close,'b')
                                 st.pyplot(figg)
                                 data_training = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])
                                 data_testing = pd.DataFrame(df['Close'][int(len(df)*0.70):int(len(df))])
