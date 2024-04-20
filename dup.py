@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 
-col17,col27,col37=st.columns([1,3,1])
+col17,col27,col37=st.columns([1,2,1])
 with col27:
     # image=Image.open('bull.png')
     st.title("Stocks Screener & Analyzer")
