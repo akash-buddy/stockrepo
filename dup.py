@@ -212,7 +212,7 @@ if option=="Nifty 100":
             dt["link"]=linkk
             dt["symbol"]=lis
 
-            st.write(dt)
+            # st.write(dt)
             if filtter=="All":
                 # st.dataframe(dt)
                 c1,c2,c3,c4,c5,c6,c7,c8=st.columns(8)
@@ -268,8 +268,8 @@ if option=="Nifty 100":
                     o1=dy.iloc[n,0]
                     o2=dy.iloc[n,1]
                     o3=dy.iloc[n,2]
-                    simsim=dy.iloc[n,6]
-                    grow_link=dy.iloc[n,5]
+                    simsim=dy.iloc[n,7]
+                    grow_link=dy.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -293,8 +293,8 @@ if option=="Nifty 100":
                     o1=dx.iloc[n,0]
                     o2=dx.iloc[n,1]
                     o3=dx.iloc[n,2]
-                    simsim=dx.iloc[n,6]
-                    grow_link=dx.iloc[n,5]
+                    simsim=dx.iloc[n,7]
+                    grow_link=dx.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -320,8 +320,8 @@ if option=="Nifty 100":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -692,8 +692,8 @@ if option=="Nifty 100":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
