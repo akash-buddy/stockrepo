@@ -80,7 +80,7 @@ if option=="Nifty 100":
     
             dt['Name']=Name
             dt['Price']=Price
-            df=pd.read_csv("2_March_saturday.csv")
+            df=pd.read_csv("saturday_special.csv")
             column_nam=list(df.columns)
             column_nam.pop(0)
             for col_name in column_nam:
