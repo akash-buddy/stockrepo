@@ -1104,7 +1104,7 @@ if option=="Agriculture":
             dt=merdt[["Name","Price"]]
             Name_l=dt['Name'].tolist()
             
-            df_s=pd.read_csv("2_March_saturday.csv")
+            df_s=pd.read_csv("saturday_special.csv")
             column_nam=list(df_s.columns)
             column_nam.pop(0)
             for col_name in column_nam:
@@ -1275,7 +1275,7 @@ if option=="Agriculture":
                     o1=dy.iloc[n,0]
                     o2=dy.iloc[n,1]
                     o3=dy.iloc[n,2]
-                    grow_link=dy.iloc[n,5]
+                    grow_link=dy.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -1291,7 +1291,7 @@ if option=="Agriculture":
                     o1=dx.iloc[n,0]
                     o2=dx.iloc[n,1]
                     o3=dx.iloc[n,2]
-                    grow_link=dx.iloc[n,5]
+                    grow_link=dx.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -1309,8 +1309,8 @@ if option=="Agriculture":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -1674,8 +1674,8 @@ if option=="Agriculture":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -2077,7 +2077,7 @@ if option=="Automobile":
             dt=merdt[["Name","Price"]]
             Name_l=dt['Name'].tolist()
             
-            df_s=pd.read_csv("2_March_saturday.csv")
+            df_s=pd.read_csv("saturday_special.csv")
             column_nam=list(df_s.columns)
             column_nam.pop(0)
             for col_name in column_nam:
@@ -2246,7 +2246,7 @@ if option=="Automobile":
                     o1=dy.iloc[n,0]
                     o2=dy.iloc[n,1]
                     o3=dy.iloc[n,2]
-                    grow_link=dy.iloc[n,5]
+                    grow_link=dy.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -2262,7 +2262,7 @@ if option=="Automobile":
                     o1=dx.iloc[n,0]
                     o2=dx.iloc[n,1]
                     o3=dx.iloc[n,2]
-                    grow_link=dx.iloc[n,5]
+                    grow_link=dx.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -2280,8 +2280,8 @@ if option=="Automobile":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -2645,8 +2645,8 @@ if option=="Automobile":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -3044,7 +3044,7 @@ if option=="Banking":
             dt=dt.drop_duplicates()
             Name_l=dt['Name'].tolist()
             
-            df_s=pd.read_csv("2_March_saturday.csv")
+            df_s=pd.read_csv("saturday_special.csv")
             column_nam=list(df_s.columns)
             column_nam.pop(0)
             for col_name in column_nam:
@@ -3169,7 +3169,7 @@ if option=="Banking":
                     o1=dt.iloc[n,0]
                     o2=dt.iloc[n,1]
                     o3=dt.iloc[n,2]
-                    # grow_link=dt.iloc[n,5]
+                    # grow_link=dt.iloc[n,6]
                     if n<8:
                         with eval("c"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -3231,7 +3231,7 @@ if option=="Banking":
                     o1=dy.iloc[n,0]
                     o2=dy.iloc[n,1]
                     o3=dy.iloc[n,2]
-                    grow_link=dy.iloc[n,5]
+                    grow_link=dy.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -3247,7 +3247,7 @@ if option=="Banking":
                     o1=dx.iloc[n,0]
                     o2=dx.iloc[n,1]
                     o3=dx.iloc[n,2]
-                    grow_link=dx.iloc[n,5]
+                    grow_link=dx.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -3265,8 +3265,8 @@ if option=="Banking":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -3630,8 +3630,8 @@ if option=="Banking":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -4029,7 +4029,7 @@ if option=="Energy":
             dt=merdt[["Name","Price"]]
             Name_l=dt['Name'].tolist()
             
-            df_s=pd.read_csv("2_March_saturday.csv")
+            df_s=pd.read_csv("saturday_special.csv")
             column_nam=list(df_s.columns)
             column_nam.pop(0)
             for col_name in column_nam:
@@ -4200,7 +4200,7 @@ if option=="Energy":
                     o1=dy.iloc[n,0]
                     o2=dy.iloc[n,1]
                     o3=dy.iloc[n,2]
-                    grow_link=dy.iloc[n,5]
+                    grow_link=dy.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -4216,7 +4216,7 @@ if option=="Energy":
                     o1=dx.iloc[n,0]
                     o2=dx.iloc[n,1]
                     o3=dx.iloc[n,2]
-                    grow_link=dx.iloc[n,5]
+                    grow_link=dx.iloc[n,6]
                     if n<5:
                         with eval("comm"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
@@ -4234,8 +4234,8 @@ if option=="Energy":
                     o1=stocks.iloc[n,0]
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
 
                     if n<3:
                         with eval("com"+str(n+1)):
@@ -4602,8 +4602,8 @@ if option=="Energy":
                     o2=stocks.iloc[n,1]
                     o3=stocks.iloc[n,2]
 
-                    simsim=stocks.iloc[n,6]
-                    grow_link=stocks.iloc[n,5]
+                    simsim=stocks.iloc[n,7]
+                    grow_link=stocks.iloc[n,6]
                     if n<3:
                         with eval("com"+str(n+1)):
                             st.metric(label=o1, value=f"₹{o2}", delta=f"{o3}₹")
