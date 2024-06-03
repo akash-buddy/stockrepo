@@ -117,7 +117,7 @@ if option=="Nifty 100":
             # Concatinating both dataframe: yfin + grow
             result = pd.concat([di, trp], ignore_index=True)
             # final_data=result.fillna(0)
-            final_da=result.drop(len(result)-(len(trp)+1))
+            # final_da=result.drop(len(result)-(len(trp)+1))
             final_data=final_da.fillna(0)
             st.dataframe(final_data)
             # st.write(f"DataFrame Length: {len(final_data)}")
