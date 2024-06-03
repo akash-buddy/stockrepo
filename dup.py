@@ -106,7 +106,7 @@ if option=="Nifty 100":
             
             sl=trp.columns
             
-            start_date = '2023-06-01'
+            start_date = '2023-12-01'
             end_date = '2024-06-03'
             # end_date = datetime.now()
             # st.write(end_date)
