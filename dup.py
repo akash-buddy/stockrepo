@@ -155,6 +155,7 @@ if option=="Nifty 100":
                 f1=round(ma1[len(ma1)-1],2)
                 ma2 =final_data[i].rolling(moving_window2).mean()
                 f2=round(ma2[len(ma2)-1],2)
+                st.write(final_data.at[len(final_data),i])
                 if (final_data.at[len(final_data),i]>=0) and (final_data.at[len(final_data),i]<=100):
                     
                     if (pre_f1 > pre_f2) and (f1 < f2)  :
