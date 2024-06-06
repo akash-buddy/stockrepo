@@ -1083,7 +1083,12 @@ if option=="Agriculture":
             sl=trp.columns
             
             start_date = '2023-01-01'
-            end_date = datetime.now()
+            noww = datetime.now()
+            dayy = noww.day
+            
+            end_date = f'2024-06-{dayy}'
+            # end_date = f'2024-06-{dayy-1}'
+            
             for i in lis:
                 data = yf.download(i, start=start_date, end=end_date)
                 di[sl[lis.index(i)]]=data["Close"] 
