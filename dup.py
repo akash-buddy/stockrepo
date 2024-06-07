@@ -172,9 +172,9 @@ if option=="Nifty 100":
                 pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
             
                 
-                ma1 =final_data[i].rolling(moving_window1).mean()
+                ma1 =result2[i].rolling(moving_window1).mean()
                 f1=round(ma1[len(ma1)-1],2)
-                ma2 =final_data[i].rolling(moving_window2).mean()
+                ma2 =result2[i].rolling(moving_window2).mean()
                 f2=round(ma2[len(ma2)-1],2)
             
                 if (pre_f1 > pre_f2) and (f1 < f2)  :
