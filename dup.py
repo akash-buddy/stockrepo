@@ -167,6 +167,7 @@ if option=="Nifty 100":
             for i in sl:
                 # for pre_data calculating moving average
                 pre_ma1=pre_data[i].rolling(moving_window1).mean()
+                st.write(pre_ma1)
                 pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
                 pre_ma2 =pre_data[i].rolling(moving_window2).mean()
                 pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
