@@ -138,18 +138,20 @@ if option=="Nifty 100":
             # st.dataframe(tre1)
 
             result2 = pd.concat([trim1, March_2, trim2, May_18, trim3], ignore_index=True)
-            # st.write(len(result2))
+            st.write(len(result2))
             st.dataframe(result2)
 
             
-            pre_data=final_data[0:len(final_data)-len(trp)]
+            pre_data=result2[0:len(result2)]
             st.dataframe(pre_data)
     
-            current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
+            # current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
+            current_price=result2[(len(result2)-1):len(result2)]
             st.write(current_price)
 
             
-            previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
+            # previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
+            previous_price=result2[(len(result2)-2):len(result2)-1]
             # previous_price=di.tail(1)
             st.write(previous_price)
 
