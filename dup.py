@@ -128,6 +128,8 @@ if option=="Nifty 100":
             # st.dataframe(May_18)
             # st.dataframe(March_2)
             tre=final_data[:208]
+            
+            tre.iloc[145]=March_2
             st.dataframe(tre)
 
             
