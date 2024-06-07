@@ -173,6 +173,7 @@ if option=="Nifty 100":
             
                 
                 ma1 =result2[i].rolling(moving_window1).mean()
+                st.write(ma1)
                 f1=round(ma1[len(ma1)-1],2)
                 ma2 =result2[i].rolling(moving_window2).mean()
                 f2=round(ma2[len(ma2)-1],2)
