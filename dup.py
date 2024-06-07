@@ -123,8 +123,10 @@ if option=="Nifty 100":
             final_data=result.fillna(0)
             st.dataframe(final_data)
             st.write(len(final_data))
-            final_da=final_data[len(final_data)-1:]
-            st.dataframe(final_da)
+            March_2=final_data[len(final_data)-2:len(final_data)-1]
+            May_18=final_data[len(final_data)-1:]
+            st.dataframe(May_18)
+            st.dataframe(March_2)
             
             pre_data=final_data[0:len(final_data)-len(trp)]
             # st.dataframe(pre_data)
