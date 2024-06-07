@@ -12,6 +12,20 @@ import streamlit as st
 from PIL import Image
 
 
+df5 = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6]
+})
+st.write(df5)
+# New row data as a Series
+new_row = pd.Series({'A': 10, 'B': 20})
+
+# Insert the new row at index 1
+df5 = pd.concat([df5.iloc[:1], new_row.to_frame().T, df5.iloc[1:]]).reset_index(drop=True)
+
+st.write(df5)
+
+
 st.set_page_config(
     page_title='Akash',
     layout='wide'
@@ -134,7 +148,7 @@ if option=="Nifty 100":
             tree=final_data[145:194]
             st.dataframe(tree)
             May_18=final_data[len(final_data)-1:]
-            tre1=final_data[194:209]
+            tre1=final_data[194:len(final_data)-2]
             st.dataframe(tre1)
 
             
