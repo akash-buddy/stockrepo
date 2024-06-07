@@ -127,10 +127,15 @@ if option=="Nifty 100":
             May_18=final_data[len(final_data)-1:]
             # st.dataframe(May_18)
             # st.dataframe(March_2)
-            tre=final_data[:208]
             
-            tre.iloc[145]=March_2
+            tre=final_data[:145]
             st.dataframe(tre)
+            March_2=final_data[len(final_data)-2:len(final_data)-1]
+            tree=final_data[145:194]
+            st.dataframe(tree)
+            May_18=final_data[len(final_data)-1:]
+            tre1=final_data[194:209]
+            st.dataframe(tre1)
 
             
             pre_data=final_data[0:len(final_data)-len(trp)]
