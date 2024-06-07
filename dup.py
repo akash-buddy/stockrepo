@@ -121,7 +121,7 @@ if option=="Nifty 100":
             result = pd.concat([di, trp], ignore_index=True)
             
             final_data=result.fillna(0)
-            st.dataframe(final_data)
+            # st.dataframe(final_data)
             st.write(len(final_data))
             March_2=final_data[len(final_data)-2:len(final_data)-1]
             May_18=final_data[len(final_data)-1:]
@@ -142,7 +142,7 @@ if option=="Nifty 100":
             st.dataframe(result2)
 
             
-            pre_data=result2[0:len(result2)]
+            pre_data=result2[0:len(result2)-1]
             st.dataframe(pre_data)
     
             # current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
