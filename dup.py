@@ -122,11 +122,10 @@ if option=="Nifty 100":
             
             final_data=result.fillna(0)
             # st.dataframe(final_data)
-            st.write(len(final_data))
+            # st.write(len(final_data))
             March_2=final_data[len(final_data)-2:len(final_data)-1]
             May_18=final_data[len(final_data)-1:]
-            # st.dataframe(May_18)
-            # st.dataframe(March_2)
+
             
             trim1=final_data[:145]
             # st.dataframe(tre)
@@ -138,22 +137,22 @@ if option=="Nifty 100":
             # st.dataframe(tre1)
 
             result2 = pd.concat([trim1, March_2, trim2, May_18, trim3], ignore_index=True)
-            st.write(len(result2))
-            st.dataframe(result2)
+            # st.write(len(result2))
+            # st.dataframe(result2)
 
             
             pre_data=result2[0:len(result2)-1]
-            st.dataframe(pre_data)
+            # st.dataframe(pre_data)
     
             # current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
             current_price=result2[(len(result2)-1):len(result2)]
-            st.write(current_price)
+            # st.write(current_price)
 
             
             # previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
             previous_price=result2[(len(result2)-2):len(result2)-1]
             # previous_price=di.tail(1)
-            st.write(previous_price)
+            # st.write(previous_price)
 
             change_price=[]
             for i in range(len(sl)):
@@ -167,20 +166,16 @@ if option=="Nifty 100":
             for i in sl:
                 # for pre_data calculating moving average
                 pre_ma1=pre_data[i].rolling(moving_window1).mean()
-                # st.write(pre_ma1)
                 pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
-                st.write(pre_f1)
                 pre_ma2 =pre_data[i].rolling(moving_window2).mean()
                 pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
             
                 
                 ma1 =result2[i].rolling(moving_window1).mean()
-                st.write(ma1)
                 f1=round(ma1[len(ma1)-1],2)
-                st.write(f1)
                 ma2 =result2[i].rolling(moving_window2).mean()
                 f2=round(ma2[len(ma2)-1],2)
-            
+
                 if (pre_f1 > pre_f2) and (f1 < f2)  :
                     oppo.append("buy")
                 elif (pre_f1 < pre_f2) and (f1 > f2) :
