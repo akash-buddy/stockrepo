@@ -121,7 +121,7 @@ if option=="Nifty 100":
             result = pd.concat([di, trp], ignore_index=True)
             
             final_data=result.fillna(0)
-            # st.dataframe(final_data)
+            st.dataframe(final_data)
             st.write(len(final_data))
             March_2=final_data[len(final_data)-2:len(final_data)-1]
             May_18=final_data[len(final_data)-1:]
@@ -138,20 +138,20 @@ if option=="Nifty 100":
             # st.dataframe(tre1)
 
             result2 = pd.concat([trim1, March_2, trim2, May_18, trim3], ignore_index=True)
-            st.write(len(result2))
+            # st.write(len(result2))
             st.dataframe(result2)
 
             
             pre_data=final_data[0:len(final_data)-len(trp)]
-            # st.dataframe(pre_data)
+            st.dataframe(pre_data)
     
             current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
-            # st.write(current_price)
+            st.write(current_price)
 
             
             previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
             # previous_price=di.tail(1)
-            # st.write(previous_price)
+            st.write(previous_price)
 
             change_price=[]
             for i in range(len(sl)):
