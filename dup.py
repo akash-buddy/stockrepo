@@ -121,12 +121,15 @@ if option=="Nifty 100":
             result = pd.concat([di, trp], ignore_index=True)
             
             final_data=result.fillna(0)
-            st.dataframe(final_data)
+            # st.dataframe(final_data)
             st.write(len(final_data))
             March_2=final_data[len(final_data)-2:len(final_data)-1]
             May_18=final_data[len(final_data)-1:]
-            st.dataframe(May_18)
-            st.dataframe(March_2)
+            # st.dataframe(May_18)
+            # st.dataframe(March_2)
+            tre=final_data[:208]
+            st.dataframe(tre)
+
             
             pre_data=final_data[0:len(final_data)-len(trp)]
             # st.dataframe(pre_data)
