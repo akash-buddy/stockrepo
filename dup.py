@@ -139,6 +139,7 @@ if option=="Nifty 100":
 
             result2 = pd.concat([trim1, March_2, trim2, May_18, trim3], ignore_index=True)
             st.write(len(result2))
+            st.dataframe(result2)
 
             
             pre_data=final_data[0:len(final_data)-len(trp)]
