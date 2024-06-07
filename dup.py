@@ -123,6 +123,8 @@ if option=="Nifty 100":
             final_data=result.fillna(0)
             st.dataframe(final_data)
             st.write(len(final_data))
+            final_da=final_data.drop(len(final_data)-1)
+            st.dataframe(final_da)
             
             pre_data=final_data[0:len(final_data)-len(trp)]
             # st.dataframe(pre_data)
