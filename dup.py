@@ -5,7 +5,6 @@ from datetime import datetime
 import pandas_datareader as web
 from keras.models import load_model
 import yfinance as yf
-# import time
 import requests
 from bs4 import BeautifulSoup
 import streamlit as st
@@ -20,10 +19,10 @@ st.set_page_config(
 
 col17,col27,col37=st.columns([1,2,1])
 with col27:
-    # image=Image.open('bull.png')
+    image=Image.open('bull.png')
     st.title("Stocks Screener & Analyzer")
     st.write(" ")
-    # st.image(image,use_column_width=True)
+    st.image(image,use_column_width=True)
 
 coll1,coll2,coll3=st.columns([1.5,2,1])
 with coll2:
@@ -75,7 +74,7 @@ else:
 
 st.write("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 
-# if option=="Nifty 100":
+
     
 di= pd.DataFrame()
 if butto:
@@ -121,7 +120,7 @@ if butto:
             trs=dt.T
             trs.columns = trs.iloc[0]
             trp = trs[1:len(trs)]
-            trp
+            # trp
             
             dp=pd.read_csv(filen)
             lis=[]
@@ -152,7 +151,7 @@ if butto:
             lis=dp['Symbol'].tolist()
             linkk=dp['Link'].tolist()
     
-            # dt= df[df['Name'].isin(dp['Name'])]
+
             dt=merdt[["Name","Price"]]
             Name_l=dt['Name'].tolist()
             
@@ -171,11 +170,8 @@ if butto:
             
             trs.columns = trs.iloc[0]
             trp = trs[1:len(trs)]
-            trp
-            # li=dt['Name'].tolist()
-
-            
-            
+            # trp
+    
             sl=trp.columns
         
         start_date = '2023-08-01'
@@ -189,57 +185,54 @@ if butto:
             data = yf.download(i, start=start_date, end=end_date)
             di[sl[lis.index(i)]]=data["Close"] 
         # di
+        
         # Concatinating both dataframe: yfin + grow
         result = pd.concat([di, trp], ignore_index=True)
-        
-        # final_data=result.fillna(0)
-        # st.dataframe(final_data)
-        
-        # pre_data=final_data[0:len(final_data)-len(trp)]
-        # # st.dataframe(pre_data)
-
-        # current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
-        # st.write(current_price)
-
-        
-        # previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
-
-        # previous_price=di.tail(1)
-        # st.write(previous_price)
+    
         final_data=result.fillna(0)
         st.dataframe(final_data)
-        # st.write(len(final_data))
+        
         March_2=final_data[len(final_data)-2:len(final_data)-1]
         May_18=final_data[len(final_data)-1:]
 
         
         trim1=final_data[:145]
-        # st.dataframe(tre)
+        
         March_2=final_data[len(final_data)-2:len(final_data)-1]
         trim2=final_data[145:194]
-        # st.dataframe(tree)
+        
         May_18=final_data[len(final_data)-1:]
         trim3=final_data[194:len(final_data)-2]
-        # st.dataframe(tre1)
+        
 
         result2 = pd.concat([trim1, March_2, trim2, May_18, trim3], ignore_index=True)
         
         pre_data=result2[0:len(result2)-1]
 
         current_price=result2[(len(result2)-1):len(result2)]
-        st.write(current_price)
+        # st.write(current_price)
+        
         previous_price=result2[(len(result2)-2):len(result2)-1]
-        st.write(previous_price)
+        # st.write(previous_price)
+        
         change_price=[]
         for i in range(len(sl)):
             change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
             change_price.append(round(change_p,2))
-        # dt['Change_price']=change_price
+        
         dt.insert(2, 'Change_price', change_price)
-        # st.write(len(final_data))
-        # st.write(final_data.at[len(final_data),"Abbott India"])
+
+        
         oppo=[]
         for i in sl:
+
+            ema1 = result2[i].ewm(span=moving_window1, adjust=False).mean()
+            f11=round(ema1[len(ema1)-1],2)
+            f11
+            ema2 = result2[i].ewm(span=moving_window2, adjust=False).mean()
+            f12=round(ema2[len(ema2)-1],2)
+            f12
+            
             # for pre_data calculating moving average
             pre_ma1=pre_data[i].rolling(moving_window1).mean()
             pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
@@ -247,9 +240,9 @@ if butto:
             pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
         
             
-            ma1 =final_data[i].rolling(moving_window1).mean()
+            ma1 =result2[i].rolling(moving_window1).mean()
             f1=round(ma1[len(ma1)-1],2)
-            ma2 =final_data[i].rolling(moving_window2).mean()
+            ma2 =result2[i].rolling(moving_window2).mean()
             f2=round(ma2[len(ma2)-1],2)
         
             if (pre_f1 > pre_f2) and (f1 < f2)  :
