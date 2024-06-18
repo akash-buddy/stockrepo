@@ -33,7 +33,7 @@ with coll2:
 col1,col2=st.columns(2)
 with col1:
     image=Image.open('what.jpg')
-    edited=image.resize((3060,2900))
+    edited=image.resize((3060,2300))
     st.image(edited,use_column_width=True)
     
 with col2:
