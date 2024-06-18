@@ -227,12 +227,11 @@ if butto:
         for i in sl:
 
             ema1 = result2[i].ewm(span=moving_window1+9, adjust=False).mean()
-            ema1
-            # f11=round(ema1[len(ema1)-1],2)
-            # f11
-            # ema2 = result2[i].ewm(span=moving_window2, adjust=False).mean()
-            # f12=round(ema2[len(ema2)-1],2)
-            # f12
+            f11=round(ema1[len(ema1)-1],2)
+            f11
+            ema2 = result2[i].ewm(span=moving_window2+15, adjust=False).mean()
+            f12=round(ema2[len(ema2)-1],2)
+            f12
             
             # for pre_data calculating moving average
             pre_ma1=pre_data[i].rolling(moving_window1).mean()
