@@ -121,7 +121,7 @@ if butto:
             trs=dt.T
             trs.columns = trs.iloc[0]
             trp = trs[1:len(trs)]
-            # trp
+            trp
             
             dp=pd.read_csv(filen)
             lis=[]
@@ -171,7 +171,7 @@ if butto:
             
             trs.columns = trs.iloc[0]
             trp = trs[1:len(trs)]
-            # trp
+            trp
             # li=dt['Name'].tolist()
 
             
@@ -193,13 +193,13 @@ if butto:
         result = pd.concat([di, trp], ignore_index=True)
         
         # final_data=result.fillna(0)
-        # # st.dataframe(final_data)
+        # st.dataframe(final_data)
         
         # pre_data=final_data[0:len(final_data)-len(trp)]
         # # st.dataframe(pre_data)
 
         # current_price=final_data[(len(final_data)-(len(trp))):len(final_data)-(len(trp)-1)]
-        # # st.write(current_price)
+        # st.write(current_price)
 
         
         # previous_price=final_data[(len(final_data)-(len(trp)+1)):len(final_data)-len(trp)]
@@ -207,7 +207,7 @@ if butto:
         # previous_price=di.tail(1)
         # st.write(previous_price)
         final_data=result.fillna(0)
-        # st.dataframe(final_data)
+        st.dataframe(final_data)
         # st.write(len(final_data))
         March_2=final_data[len(final_data)-2:len(final_data)-1]
         May_18=final_data[len(final_data)-1:]
@@ -227,8 +227,9 @@ if butto:
         pre_data=result2[0:len(result2)-1]
 
         current_price=result2[(len(result2)-1):len(result2)]
-        
+        st.write(current_price)
         previous_price=result2[(len(result2)-2):len(result2)-1]
+        st.write(previous_price)
         change_price=[]
         for i in range(len(sl)):
             change_p=current_price.iloc[0,i]-previous_price.iloc[0,i]
