@@ -31,7 +31,11 @@ with coll2:
     
 
 col1,col2=st.columns(2)
-
+with col1:
+    image=Image.open('what.jpg')
+    edited=image.resize((3060,2900))
+    st.image(edited,use_column_width=True)
+    
 with col2:
     moving1= st.number_input("Enter Big moving Average")
     moving_window1=int(moving1)
@@ -46,10 +50,7 @@ with col2:
     option =  st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
 
     butto=st.button("Refresh")
-with col1:
-    image=Image.open('what.jpg')
-    edited=image.resize((3060,1900))
-    st.image(edited,use_column_width=True)
+
 
 if option=="Nifty 100":
     url=f'https://groww.in/stocks/filter?closePriceHigh=100000&closePriceLow=0&index=Nifty%20100&marketCapHigh=2000000&marketCapLow=0&page=0&size=100&sortBy=COMPANY_NAME&sortType=ASC'
