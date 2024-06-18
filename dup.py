@@ -22,7 +22,7 @@ with col27:
     image=Image.open('bull.png')
     st.title("Stocks Screener & Analyzer")
     st.write(" ")
-    st.image(image,use_column_width=True)
+    # st.image(image,use_column_width=True)
 
 coll1,coll2,coll3=st.columns([1.5,2,1])
 with coll2:
