@@ -226,7 +226,8 @@ if butto:
         oppo=[]
         for i in sl:
 
-            # ema1 = result2[i].ewm(span=moving_window1, adjust=False).mean()
+            ema1 = result2[i].ewm(span=moving_window1, adjust=False).mean()
+            ema1
             # f11=round(ema1[len(ema1)-1],2)
             # f11
             # ema2 = result2[i].ewm(span=moving_window2, adjust=False).mean()
