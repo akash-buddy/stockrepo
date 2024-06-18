@@ -39,6 +39,8 @@ with col2:
     moving2=st.number_input("Enter Small moving Average")
     moving_window2=int(moving2)
 
+    averages=st.radio("Select Averages Methods ",['SMA','EMA'])
+
     filtter=st.radio("Select To Filtter Stocks ",['All','Buy','Sell','Top Gainers','Top Losers'])
 
     option =  st.selectbox('Sectors',("Nifty 100", "Banking" , "Energy" , "Agriculture", "Automobile"))
@@ -224,33 +226,62 @@ if butto:
 
         
         oppo=[]
-        for i in sl:
-
-            ema1 = result2[i].ewm(span=moving_window1+9, adjust=False).mean()
-            f11=round(ema1[len(ema1)-1],2)
-            f11
-            ema2 = result2[i].ewm(span=moving_window2+15, adjust=False).mean()
-            f12=round(ema2[len(ema2)-1],2)
-            f12
+        if (averages=="EMA") and (moving_window1>=0):
+            for i in sl:
+                # for pre_data calculating exponential moving average
+                pre_ma1=pre_data[i].ewm(span=moving_window1, adjust=False).mean()
+                pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
+                pre_ma2 =pre_data[i].ewm(span=moving_window2, adjust=False).mean()
+                pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
             
-            # for pre_data calculating moving average
-            pre_ma1=pre_data[i].rolling(moving_window1).mean()
-            pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
-            pre_ma2 =pre_data[i].rolling(moving_window2).mean()
-            pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
-        
+                ma1 =result2[i].ewm(span=moving_window1, adjust=False).mean()
+                f1=round(ma1[len(ma1)-1],2)
+                ma2 =result2[i].ewm(span=moving_window2, adjust=False).mean()
+                f2=round(ma2[len(ma2)-1],2)
+                if (pre_f1 > pre_f2) and (f1 < f2)  :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+        elif (averages=="EMA") and (moving_window1=0):
+            for i in sl:
+                # for pre_data calculating exponential moving average
+                pre_ma1=pre_data[i].ewm(span=moving_window1+1, adjust=False).mean()
+                pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
+                pre_ma2 =pre_data[i].ewm(span=moving_window2+1, adjust=False).mean()
+                pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
             
-            ma1 =result2[i].rolling(moving_window1).mean()
-            f1=round(ma1[len(ma1)-1],2)
-            ma2 =result2[i].rolling(moving_window2).mean()
-            f2=round(ma2[len(ma2)-1],2)
+                ma1 =result2[i].ewm(span=moving_window1+1, adjust=False).mean()
+                f1=round(ma1[len(ma1)-1],2)
+                ma2 =result2[i].ewm(span=moving_window2+1, adjust=False).mean()
+                f2=round(ma2[len(ma2)-1],2)
+                if (pre_f1 > pre_f2) and (f1 < f2)  :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
+        else:
+            for i in sl:
+                # for pre_data calculating moving average
+                pre_ma1=pre_data[i].rolling(moving_window1).mean()
+                pre_f1=round(pre_ma1[len(pre_ma1)-1],2)
+                pre_ma2 =pre_data[i].rolling(moving_window2).mean()
+                pre_f2=round(pre_ma2[len(pre_ma2)-1],2)
+            
+                
+                ma1 =result2[i].rolling(moving_window1).mean()
+                f1=round(ma1[len(ma1)-1],2)
+                ma2 =result2[i].rolling(moving_window2).mean()
+                f2=round(ma2[len(ma2)-1],2)
         
-            if (pre_f1 > pre_f2) and (f1 < f2)  :
-                oppo.append("buy")
-            elif (pre_f1 < pre_f2) and (f1 > f2) :
-                oppo.append("sell")
-            else:
-                oppo.append("Wait for opportunity")
+                if (pre_f1 > pre_f2) and (f1 < f2)  :
+                    oppo.append("buy")
+                elif (pre_f1 < pre_f2) and (f1 > f2) :
+                    oppo.append("sell")
+                else:
+                    oppo.append("Wait for opportunity")
             
         dt["Recommended"]=oppo
         
