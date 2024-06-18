@@ -245,7 +245,7 @@ if butto:
                 else:
                     oppo.append("Wait for opportunity")
                     
-        elif (averages=="EMA") and (moving_window1=0.0):
+        elif (averages=="EMA") and (moving_window1==0):
             for i in sl:
                 # for pre_data calculating exponential moving average
                 pre_ma1=pre_data[i].ewm(span=moving_window1+1, adjust=False).mean()
