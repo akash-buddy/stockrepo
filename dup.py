@@ -227,7 +227,7 @@ if butto:
 
         
         oppo=[]
-        if (averages=="EMA") and (moving_window1>=0):
+        if (averages=="EMA") and (moving_window1>0):
             for i in sl:
                 # for pre_data calculating exponential moving average
                 pre_ma1=pre_data[i].ewm(span=moving_window1, adjust=False).mean()
